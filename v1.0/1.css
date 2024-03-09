@@ -1,0 +1,74 @@
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: blue;
+}
+
+ul {
+  background-color: black;
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: inline-block;
+  padding: 19px;
+  text-decoration: none;
+}
+
+section {
+  padding: 0;
+  margin: 0;
+}
+
+#imagediv {
+  display: flex;
+  width: 100vw;
+  background-color: black;
+  margin-bottom: 0; /* Add this line to remove the bottom margin */
+}
+
+#me {
+  background-color: black;
+  height: 700px;
+  display: block;
+
+  filter: grayscale(1);
+  transition: 1s;
+}
+
+#me:hover{
+  filter: grayscale(0);
+  transition: 1s;
+}
+
+div {
+  margin: 0;
+}
+
+#helloim{
+  font-family: "Shadows Into Light";
+  font-size: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+  background-color: black;
+  color: white;
+}
+
+#AlwinJoseph{
+  font-family: "Montserrat";
+  font-weight: bold;
+  color: blue;
+}
