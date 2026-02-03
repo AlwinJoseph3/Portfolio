@@ -132,18 +132,24 @@ const Contact = () => {
         </motion.div>
 
         <div className="mt-20 flex flex-wrap justify-center gap-12 text-zinc-400 font-mono text-sm uppercase tracking-widest">
-          <a href="mailto:your@email.com" className="hover:text-brand-primary">
-            your@email.com
+          <a
+            href="mailto:alwinjoseph1403@gmail.com"
+            className="hover:text-brand-primary"
+            target="_blank"
+          >
+            Email
           </a>
           <a
-            href="https://linkedin.com/in/yourprofile"
+            href="https://www.linkedin.com/in/alwin-joseph-807420221/"
             className="hover:text-brand-primary"
+            target="_blank"
           >
             LinkedIn
           </a>
           <a
-            href="https://github.com/yourgit"
+            href="https://github.com/AlwinJoseph3"
             className="hover:text-brand-primary"
+            target="_blank"
           >
             GitHub
           </a>
