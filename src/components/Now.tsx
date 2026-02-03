@@ -1,4 +1,3 @@
-import React from "react";
 import { MapPin, Dumbbell, Bike, Code } from "lucide-react";
 
 const Now = () => {
