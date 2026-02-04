@@ -276,7 +276,7 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                 Currently based in Kochi, Kerala. Seeking UI/UX Designer roles.
               </p>
               <a
-                href="public/Alwin_Joseph_Resume.pdf"
+                href="/Alwin_Joseph_Resume.pdf"
                 download
                 className="px-6 py-3 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full text-xs font-bold dark:text-white flex items-center gap-2 hover:bg-[#007AFF] hover:text-white transition-all shadow-sm"
               >
