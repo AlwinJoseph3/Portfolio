@@ -4,12 +4,24 @@ import { Sphere, MeshDistortMaterial } from "@react-three/drei";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowRight, X, FileText, Download } from "lucide-react";
-import Contact from "../components/Contact";
+import {
+  ArrowLeft,
+  ArrowRight,
+  X,
+  FileText,
+  Download,
+  MapPin,
+  Cpu,
+  Globe,
+  Linkedin,
+  Layers,
+  Lightbulb,
+  Github,
+} from "lucide-react";
 import { projectData } from "../data/projects";
 import "swiper/css";
 
-const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
+const Home: React.FC<{ isDark: boolean }> = () => {
   const navigate = useNavigate();
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const projects = Object.values(projectData);
@@ -21,13 +33,13 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           <Canvas camera={{ position: [0, 0, 5] }}>
             <ambientLight intensity={1.5} />
-            <pointLight position={[10, 10, 10]} intensity={2} />
-            <Sphere args={[1, 100, 200]} scale={2.2}>
+            {/* <pointLight position={[10, 10, 10]} intensity={2} /> */}
+            <Sphere args={[1, 100, 200]} scale={3}>
               <MeshDistortMaterial
-                color={isDark ? "#007AFF" : "#45a2ff"} // iOS Blue Primary
-                distort={0.5}
-                speed={2}
-                roughness={0.1}
+                color={"#007AFF"}
+                distort={0.2}
+                speed={3}
+                roughness={1}
                 metalness={0.1}
               />
             </Sphere>
@@ -35,12 +47,12 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
         </div>
 
         <div className="relative z-10 text-center">
-          <h1 className="text-7xl md:text-9xl font-black tracking-tighter text-black dark:text-white uppercase transition-colors">
+          <h1 className="text-7xl md:text-9xl font-black tracking-tighter text-white dark:text-white uppercase transition-colors">
             Alwin
             <br />
             Joseph
           </h1>
-          <p className="mt-4 text-black dark:text-white font-bold tracking-widest uppercase opacity-80">
+          <p className="mt-4 text-white dark:text-white font-bold tracking-widest uppercase opacity-80">
             Frontend Dev • UI/UX • Graphics
           </p>
 
@@ -87,17 +99,17 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
       <section id="works" className="py-32 px-4 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-8">
           <div className="w-24 hidden md:block"></div>
-          <h2 className="text-5xl font-black dark:text-white uppercase tracking-tighter text-center">
+          <h2 className="text-5xl font-black dark:text-white uppercase tracking-tighter">
             Projects
           </h2>
           <div className="flex gap-4">
-            <button className="swiper-prev w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center dark:text-white hover:bg-[#007AFF] hover:border-[#007AFF] transition-all group">
+            <button className="swiper-prev w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center dark:text-white hover:bg-[#007AFF] transition-all group">
               <ArrowLeft
                 size={20}
                 className="group-hover:-translate-x-1 transition-transform"
               />
             </button>
-            <button className="swiper-next w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center dark:text-white hover:bg-[#007AFF] hover:border-[#007AFF] transition-all group">
+            <button className="swiper-next w-12 h-12 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center dark:text-white hover:bg-[#007AFF] transition-all group">
               <ArrowRight
                 size={20}
                 className="group-hover:translate-x-1 transition-transform"
@@ -163,22 +175,123 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
         </Swiper>
       </section>
 
-      {/* 4. RESUME MODAL */}
+      {/* 4. PROFESSIONAL BENTO PROFILE */}
+      <section className="py-32 px-4 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
+          {/* Status/Location Card */}
+          <div className="md:col-span-2 bg-zinc-50 dark:bg-zinc-900/50 rounded-[2.5rem] p-10 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between">
+            <div className="flex justify-between items-start">
+              <div className="p-4 bg-[#007AFF]/10 rounded-2xl">
+                <MapPin className="text-[#007AFF]" />
+              </div>
+              <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
+                Availability
+              </span>
+            </div>
+            <div>
+              <h3 className="text-4xl font-black dark:text-white uppercase tracking-tighter">
+                Kochi, India
+              </h3>
+            </div>
+          </div>
+
+          {/* AI & Research Card */}
+          <div className="bg-[#007AFF] rounded-[2.5rem] p-10 text-white flex flex-col justify-between overflow-hidden relative group">
+            <Cpu size={32} className="relative z-10" />
+            <div className="relative z-10">
+              <h4 className="text-sm font-mono uppercase tracking-widest opacity-70">
+                Research
+              </h4>
+              <p className="text-2xl font-black uppercase tracking-tighter mt-1">
+                AI / ML <br /> Implementation
+              </p>
+            </div>
+            {/* Background Hint for Final Year Project */}
+            <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
+              <Globe size={120} />
+            </div>
+          </div>
+
+          {/* Social Links Card */}
+          <div className="bg-zinc-50 dark:bg-zinc-900/50 rounded-[2.5rem] p-10 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between">
+            <div className="flex flex-col gap-4">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                className="p-3 bg-white dark:bg-zinc-800 rounded-xl flex items-center justify-center text-zinc-600 dark:text-white hover:bg-[#007AFF] hover:text-white transition-all"
+              >
+                <Linkedin size={20} />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                className="p-3 bg-white dark:bg-zinc-800 rounded-xl flex items-center justify-center text-zinc-600 dark:text-white hover:bg-[#007AFF] hover:text-white transition-all"
+              >
+                <Github size={20} />
+              </a>
+            </div>
+            <p className="text-xs font-mono text-zinc-500 uppercase rotate-90 origin-left translate-x-4">
+              Connect
+            </p>
+          </div>
+
+          {/* Design Ethos Card */}
+          <div className="md:col-span-2 bg-zinc-50 dark:bg-zinc-900/50 rounded-[2.5rem] p-10 border border-zinc-200 dark:border-zinc-800 flex items-center gap-8 overflow-hidden relative">
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-4">
+                <Lightbulb className="text-[#007AFF]" size={20} />
+                <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
+                  Ethos
+                </span>
+              </div>
+              <h3 className="text-4xl font-black dark:text-white uppercase tracking-tighter">
+                Scalable <br /> Visual Systems
+              </h3>
+              <p className="text-sm text-zinc-500 mt-4 max-w-xs leading-relaxed">
+                Developing modular design systems that bridge the gap between
+                Figma prototypes and production-ready React code.
+              </p>
+            </div>
+          </div>
+
+          {/* Contact CTA Card */}
+          <div
+            className="md:col-span-2 bg-zinc-950 rounded-[2.5rem] p-10 flex flex-col justify-between group cursor-pointer"
+            onClick={() => (window.location.href = "mailto:your@email.com")}
+          >
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <Layers className="text-[#007AFF]" size={18} />
+                <span className="text-white font-mono text-xs uppercase tracking-widest">
+                  Project Inquiry
+                </span>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-[#007AFF] flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                <ArrowRight size={18} />
+              </div>
+            </div>
+            <h3 className="text-4xl font-black text-white uppercase tracking-tighter">
+              Designing the <br /> future of systems.
+            </h3>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. RESUME MODAL */}
       {isResumeOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
           <div
             className="absolute inset-0 bg-black/90 backdrop-blur-xl"
             onClick={() => setIsResumeOpen(false)}
           />
-
           <div className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-zinc-950 rounded-[3rem] overflow-hidden shadow-2xl flex flex-col border border-zinc-200 dark:border-zinc-800 animate-in fade-in zoom-in duration-300">
             <div className="p-8 border-b border-zinc-100 dark:border-zinc-900 flex justify-between items-center">
               <div>
                 <h2 className="text-3xl font-black dark:text-white uppercase tracking-tighter">
-                  Quick Look
+                  Credentials
                 </h2>
                 <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mt-1">
-                  Alwin Joseph
+                  Alwin Joseph / B.Tech CSBS '25
                 </p>
               </div>
               <button
@@ -188,9 +301,7 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                 <X size={20} />
               </button>
             </div>
-
             <div className="flex-1 overflow-y-auto p-8 md:p-12 space-y-16">
-              {/* Education Section */}
               <div>
                 <h4 className="text-[#007AFF] font-mono text-xs font-black uppercase tracking-[0.3em] mb-6">
                   Education
@@ -200,12 +311,11 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                     B.Tech in Computer Science & Business Systems
                   </h3>
                   <p className="text-zinc-500">
-                    Rajagiri School of Engineering and Technology | 2025
+                    Rajagiri School of Engineering and Technology | Class of
+                    2025
                   </p>
                 </div>
               </div>
-
-              {/* Experience Section */}
               <div>
                 <h4 className="text-[#007AFF] font-mono text-xs font-black uppercase tracking-[0.3em] mb-6">
                   Experience
@@ -217,68 +327,58 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                         Creative Lead
                       </h3>
                       <span className="font-mono text-xs text-zinc-500">
-                        College Department Club
+                        College Club
                       </span>
                     </div>
-                    <ul className="space-y-3 text-zinc-500">
+                    <ul className="space-y-3 text-zinc-500 text-sm">
                       <li>
-                        • Spearheaded visual identity and logo design for major
-                        college events.
+                        • Spearheaded visual identity and logo design for
+                        departmental club.
                       </li>
                       <li>
-                        • Developed motion graphics and intro videos for event
-                        promotions.
+                        • Produced high-fidelity motion graphics and event
+                        promos.
                       </li>
                       <li>
-                        • Designed and managed posters and promotional materials
-                        for events.
+                        • Integrated engineering principles with creative design
+                        workflows.
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
-
-              {/* Technical Skills */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-8 pb-12">
                 <div>
                   <h4 className="text-zinc-400 font-mono text-[10px] uppercase mb-4">
-                    Development
+                    Core Tech
                   </h4>
                   <ul className="text-sm font-bold dark:text-white space-y-1">
-                    <li>React</li>
-                    <li>TailwindCSS</li>
-                    <li>Flutter</li>
-                    <li>C</li>
-                    <li>C++</li>
-                    <li>HTML5</li>
-                    <li>CSS3</li>
-                    <li>JavaScript</li>
-                    <li>Python</li>
+                    <li>React / Tailwind</li>
+                    <li>Three.js / Canvas</li>
+                    <li>Python / YOLOv5</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="text-zinc-400 font-mono text-[10px] uppercase mb-4">
-                    Design
+                    Creative
                   </h4>
                   <ul className="text-sm font-bold dark:text-white space-y-1">
-                    <li>Figma</li>
-                    <li>Blender</li>
-                    <li>Adobe Illustrator</li>
-                    <li>Adobe Photoshop</li>
-                    <li>Adobe Premiere Pro</li>
+                    <li>Figma / Prototyping</li>
+                    <li>Blender / 3D</li>
+                    <li>Adobe CC Suite</li>
                   </ul>
                 </div>
               </div>
             </div>
-
-            <div className="p-8 bg-zinc-50 dark:bg-zinc-900/50 flex flex-col md:flex-row gap-4 justify-between items-center text-center md:text-left">
-              <p className="text-xs text-zinc-500 max-w-xs italic">
-                Currently based in Kochi, Kerala. Seeking UI/UX Designer roles.
+            <div className="p-8 bg-zinc-50 dark:bg-zinc-900/50 flex flex-col md:flex-row gap-4 justify-between items-center">
+              <p className="text-xs text-zinc-500 max-w-xs italic text-center md:text-left">
+                Located in Kochi, Kerala. Specialized in bridging the gap
+                between design and high-level engineering.
               </p>
               <a
                 href="/Alwin_Joseph_Resume.pdf"
                 download
-                className="px-6 py-3 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full text-xs font-bold dark:text-white flex items-center gap-2 hover:bg-[#007AFF] hover:text-white transition-all shadow-sm"
+                className="px-6 py-3 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full text-xs font-bold dark:text-white flex items-center gap-2 hover:bg-[#007AFF] hover:text-white transition-all shadow-md"
               >
                 <Download size={14} /> Download PDF
               </a>
@@ -286,8 +386,6 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
           </div>
         </div>
       )}
-
-      <Contact />
     </main>
   );
 };

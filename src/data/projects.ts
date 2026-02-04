@@ -17,9 +17,9 @@ export const projectData: Record<string, Project> = {
     progress: "Current",
     name: "MotoBuddy",
     description:
-      "A community-driven expedition platform for motorcyclists to discover high-altitude routes, join group rides, and track adventure milestones.",
+      "A community-driven expedition platform for motorcyclists to discover destinations and routes, join group rides, and track adventure milestones.",
     uiStrategy:
-      "Rugged high-contrast dark mode using deep charcoal and vibrant safety orange, optimized for outdoor readability.",
+      "Rugged high-contrast dark mode using deep charcoal and vibrant safety orange.",
     techStack: ["Flutter", "Dart", "Figma", "Firebase"],
     mockupimage: "/models/mb.png",
     colors: ["#F15A24", "#FFFFFF", "#1E1E1E", "#141414"],
@@ -59,7 +59,7 @@ export const projectData: Record<string, Project> = {
     description:
       "A hyperlocal marketplace connecting skilled home cooks with neighbors, designed to foster community through shared culinary experiences.",
     uiStrategy:
-      "Soft, inviting aesthetic using a deep purple (#654A9E) and lavender palette, paired with Franklin Gothic Medium for a modern yet approachable feel.",
+      "Soft, inviting aesthetic using a deep purple (#654A9E) and lavender palette, paired with Franklin Gothic Medium for an approachable feel.",
     techStack: ["Flutter", "Dart", "Firebase", "Adobe Illustrator"],
     mockupimage: "/assets/HomeChef/mockup.png",
     screenshots: [
