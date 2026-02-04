@@ -15,13 +15,15 @@ import {
   Globe,
   Linkedin,
   Layers,
-  Lightbulb,
   Github,
+  Inbox,
 } from "lucide-react";
 import { projectData } from "../data/projects";
 import "swiper/css";
+import PixelSandbox from "../components/InteractiveSandbox";
+import TerminalFooter from "../components/Footer";
 
-const Home: React.FC<{ isDark: boolean }> = () => {
+const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
   const navigate = useNavigate();
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const projects = Object.values(projectData);
@@ -34,7 +36,7 @@ const Home: React.FC<{ isDark: boolean }> = () => {
           <Canvas camera={{ position: [0, 0, 5] }}>
             <ambientLight intensity={1.5} />
             {/* <pointLight position={[10, 10, 10]} intensity={2} /> */}
-            <Sphere args={[1, 100, 200]} scale={3}>
+            <Sphere args={[1, 100, 200]} scale={2.5}>
               <MeshDistortMaterial
                 color={"#007AFF"}
                 distort={0.2}
@@ -216,58 +218,43 @@ const Home: React.FC<{ isDark: boolean }> = () => {
           <div className="bg-zinc-50 dark:bg-zinc-900/50 rounded-[2.5rem] p-10 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between">
             <div className="flex flex-col gap-4">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/alwin-joseph-807420221"
                 target="_blank"
                 className="p-3 bg-white dark:bg-zinc-800 rounded-xl flex items-center justify-center text-zinc-600 dark:text-white hover:bg-[#007AFF] hover:text-white transition-all"
               >
                 <Linkedin size={20} />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://github.com/AlwinJoseph3"
                 target="_blank"
                 className="p-3 bg-white dark:bg-zinc-800 rounded-xl flex items-center justify-center text-zinc-600 dark:text-white hover:bg-[#007AFF] hover:text-white transition-all"
               >
                 <Github size={20} />
+              </a>
+              <a
+                href="https://github.com/AlwinJoseph3"
+                target="_blank"
+                className="p-3 bg-white dark:bg-zinc-800 rounded-xl flex items-center justify-center text-zinc-600 dark:text-white hover:bg-[#007AFF] hover:text-white"
+              >
+                <Inbox size={20} />
               </a>
             </div>
             <p className="text-xs font-mono text-zinc-500 uppercase rotate-90 origin-left translate-x-4">
               Connect
             </p>
           </div>
-
-          {/* Design Ethos Card */}
-          <div className="md:col-span-2 bg-zinc-50 dark:bg-zinc-900/50 rounded-[2.5rem] p-10 border border-zinc-200 dark:border-zinc-800 flex items-center gap-8 overflow-hidden relative">
-            <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-4">
-                <Lightbulb className="text-[#007AFF]" size={20} />
-                <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">
-                  Ethos
-                </span>
-              </div>
-              <h3 className="text-4xl font-black dark:text-white uppercase tracking-tighter">
-                Scalable <br /> Visual Systems
-              </h3>
-              <p className="text-sm text-zinc-500 mt-4 max-w-xs leading-relaxed">
-                Developing modular design systems that bridge the gap between
-                Figma prototypes and production-ready React code.
-              </p>
-            </div>
+          <div className="md:col-span-2 h-[400px] md:h-auto">
+            <PixelSandbox isDark={isDark} />
           </div>
 
           {/* Contact CTA Card */}
           <div
-            className="md:col-span-2 bg-zinc-950 rounded-[2.5rem] p-10 flex flex-col justify-between group cursor-pointer"
+            className="md:col-span-2  bg-[#007AFF] rounded-[2.5rem] p-10 flex flex-col justify-between group cursor-pointer"
             onClick={() => (window.location.href = "mailto:your@email.com")}
           >
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <Layers className="text-[#007AFF]" size={18} />
-                <span className="text-white font-mono text-xs uppercase tracking-widest">
-                  Project Inquiry
-                </span>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-[#007AFF] flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                <ArrowRight size={18} />
               </div>
             </div>
             <h3 className="text-4xl font-black text-white uppercase tracking-tighter">
@@ -386,6 +373,7 @@ const Home: React.FC<{ isDark: boolean }> = () => {
           </div>
         </div>
       )}
+      <TerminalFooter isDark={isDark} />
     </main>
   );
 };
