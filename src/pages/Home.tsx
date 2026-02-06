@@ -4,7 +4,6 @@ import { Sphere, MeshDistortMaterial } from "@react-three/drei";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion"; // Added Framer Motion
 import {
   ArrowLeft,
   ArrowRight,
@@ -30,88 +29,49 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const projects = Object.values(projectData);
 
-  // --- PARALLAX LOGIC ---
-  const { scrollY } = useScroll();
-
-  // 1. Hero Parallax: Text moves fast, Sphere moves slow
-  const yHeroText = useTransform(scrollY, [0, 500], [0, -250]);
-  const yHeroSphere = useTransform(scrollY, [0, 500], [0, -80]);
-
-  // 2. Bento Parallax: Cards float at different speeds
-  const yBento1 = useTransform(scrollY, [1000, 2000], [0, -40]); // Location
-  const yBento2 = useTransform(scrollY, [1000, 2000], [0, -80]); // AI (Highlights it)
-  const yBento3 = useTransform(scrollY, [1000, 2000], [0, -20]); // Social
-
-  // 3. Background Grid Parallax: Moves very slowly for "atmosphere"
-  const yGrid = useTransform(scrollY, [0, 2000], [0, 100]);
-
   return (
-    <main className="min-h-screen bg-white dark:bg-[#0a0a0a] transition-colors duration-500 relative overflow-hidden">
-      {/* 0. GLOBAL BACKGROUND GRID */}
-      <motion.div
-        style={{ y: yGrid }}
-        className="fixed inset-0 pointer-events-none z-0 opacity-[0.03] dark:opacity-[0.07]"
-      >
-        <div
-          className="w-full h-[200%] absolute top-0 left-0"
-          style={{
-            backgroundImage: `radial-gradient(circle, ${isDark ? "#fff" : "#000"} 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </motion.div>
-
+    <main className="min-h-screen bg-white dark:bg-[#0a0a0a] transition-colors duration-500">
       {/* 1. HERO SECTION */}
       <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
-        {/* Parallax Sphere Layer */}
-        <motion.div
-          style={{ y: yHeroSphere }}
-          className="absolute inset-0 w-full h-full z-0 pointer-events-none"
-        >
+        <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
           <Canvas camera={{ position: [0, 0, 5] }}>
             <ambientLight intensity={1.5} />
+            {/* <pointLight position={[10, 10, 10]} intensity={2} /> */}
             <Sphere args={[1, 100, 200]} scale={2.5}>
               <MeshDistortMaterial
                 color={"#007AFF"}
-                distort={0.3} // Increased distort slightly for more "liquid" feel
+                distort={0.2}
                 speed={3}
-                roughness={0.2}
-                metalness={0.5} // Increased metalness for "Tech" look
+                roughness={1}
+                metalness={0.1}
               />
             </Sphere>
           </Canvas>
-        </motion.div>
+        </div>
 
-        {/* Parallax Text Layer */}
-        <motion.div
-          style={{ y: yHeroText }}
-          className="relative z-10 text-center"
-        >
+        <div className="relative z-10 text-center">
           <h1 className="text-7xl md:text-9xl font-black tracking-tighter text-white dark:text-white uppercase transition-colors">
             Alwin
             <br />
             Joseph
           </h1>
-          <p className="mt-4 text-white dark:text-white font-bold tracking-widest uppercase opacity-80 mix-blend-overlay">
+          <p className="mt-4 text-white dark:text-white font-bold tracking-widest uppercase opacity-80">
             Frontend Dev • UI/UX • Graphics
           </p>
 
           <button
             onClick={() => setIsResumeOpen(true)}
-            className="mt-12 px-8 py-4 bg-[#007AFF] border border-[#ffffff]/30 backdrop-blur-md text-white font-black rounded-full uppercase tracking-widest text-xs flex items-center gap-3 mx-auto hover:scale-105 active:scale-95 transition-all shadow-xl shadow-blue-500/20"
+            className="mt-12 px-8 py-4 bg-[#007AFF] border border-[#ffffff] text-white font-black rounded-full uppercase tracking-widest text-xs flex items-center gap-3 mx-auto hover:scale-105 active:scale-95 transition-all shadow-xl shadow-blue-500/20"
           >
             <FileText size={16} /> View Resume
           </button>
-        </motion.div>
+        </div>
       </section>
 
-      {/* About Section - Z-Index 10 ensures it sits above background grid */}
-      <div className="relative z-10">
-        <About isDark={isDark} />
-      </div>
+      <About isDark={isDark} />
 
       {/* 2. TECH STACK MARQUEE */}
-      <div className="py-20 overflow-hidden bg-zinc-50/80 dark:bg-[#0c0c0c]/80 border-y border-zinc-200 dark:border-zinc-800 backdrop-blur-sm relative z-10">
+      <div className="py-20 overflow-hidden bg-zinc-50 dark:bg-[#0c0c0c] border-y border-zinc-200 dark:border-zinc-800">
         <div className="flex whitespace-nowrap animate-marquee">
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex gap-20 px-10 items-center">
@@ -141,10 +101,7 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
       </div>
 
       {/* 3. PROJECT CAROUSEL */}
-      <section
-        id="works"
-        className="py-32 px-4 max-w-7xl mx-auto relative z-10"
-      >
+      <section id="works" className="py-32 px-4 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-8">
           <div className="w-24 hidden md:block"></div>
           <h2 className="text-5xl font-black dark:text-white uppercase tracking-tighter">
@@ -223,14 +180,11 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
         </Swiper>
       </section>
 
-      {/* 4. PROFESSIONAL BENTO PROFILE (With Floating Parallax) */}
-      <section className="py-32 px-4 max-w-7xl mx-auto relative z-10">
+      {/* 4. PROFESSIONAL BENTO PROFILE */}
+      <section className="py-32 px-4 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
-          {/* Status/Location Card - Moves Slow */}
-          <motion.div
-            style={{ y: yBento1 }}
-            className="md:col-span-2 bg-zinc-50 dark:bg-zinc-900/50 rounded-[2.5rem] p-10 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between"
-          >
+          {/* Status/Location Card */}
+          <div className="md:col-span-2 bg-zinc-50 dark:bg-zinc-900/50 rounded-[2.5rem] p-10 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between">
             <div className="flex justify-between items-start">
               <div className="p-4 bg-[#007AFF]/10 rounded-2xl">
                 <MapPin className="text-[#007AFF]" />
@@ -244,13 +198,10 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                 Kochi, India
               </h3>
             </div>
-          </motion.div>
+          </div>
 
-          {/* AI & Research Card - Moves Fast (Highlight) */}
-          <motion.div
-            style={{ y: yBento2 }}
-            className="bg-[#007AFF] rounded-[2.5rem] p-10 text-white flex flex-col justify-between overflow-hidden relative group"
-          >
+          {/* AI & Research Card */}
+          <div className="bg-[#007AFF] rounded-[2.5rem] p-10 text-white flex flex-col justify-between overflow-hidden relative group">
             <Cpu size={32} className="relative z-10" />
             <div className="relative z-10">
               <h4 className="text-sm font-mono uppercase tracking-widest opacity-70">
@@ -260,16 +211,14 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                 AI / ML <br /> Implementation
               </p>
             </div>
+            {/* Background Hint for Final Year Project */}
             <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity">
               <Globe size={120} />
             </div>
-          </motion.div>
+          </div>
 
-          {/* Social Links Card - Moves Normal */}
-          <motion.div
-            style={{ y: yBento3 }}
-            className="bg-zinc-50 dark:bg-zinc-900/50 rounded-[2.5rem] p-10 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between"
-          >
+          {/* Social Links Card */}
+          <div className="bg-zinc-50 dark:bg-zinc-900/50 rounded-[2.5rem] p-10 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between">
             <div className="flex flex-col gap-4">
               <a
                 href="https://www.linkedin.com/in/alwin-joseph-807420221"
@@ -286,7 +235,8 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                 <Github size={20} />
               </a>
               <a
-                href="mailto:your@email.com"
+                href="https://github.com/AlwinJoseph3"
+                target="_blank"
                 className="p-3 bg-white dark:bg-zinc-800 rounded-xl flex items-center justify-center text-zinc-600 dark:text-white hover:bg-[#007AFF] hover:text-white"
               >
                 <Inbox size={20} />
@@ -295,16 +245,14 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
             <p className="text-xs font-mono text-zinc-500 uppercase rotate-90 origin-left translate-x-4">
               Connect
             </p>
-          </motion.div>
-
-          {/* Sandbox - Static (Anchors the Grid) */}
+          </div>
           <div className="md:col-span-2 h-[400px] md:h-auto">
             <PixelSandbox isDark={isDark} />
           </div>
 
-          {/* Contact CTA Card - Static */}
+          {/* Contact CTA Card */}
           <div
-            className="md:col-span-2 bg-[#007AFF] rounded-[2.5rem] p-10 flex flex-col justify-between group cursor-pointer"
+            className="md:col-span-2  bg-[#007AFF] rounded-[2.5rem] p-10 flex flex-col justify-between group cursor-pointer"
             onClick={() => (window.location.href = "mailto:your@email.com")}
           >
             <div className="flex justify-between items-center">
@@ -319,7 +267,7 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
         </div>
       </section>
 
-      {/* 5. RESUME MODAL (Unchanged) */}
+      {/* 5. RESUME MODAL */}
       {isResumeOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
           <div
@@ -327,7 +275,6 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
             onClick={() => setIsResumeOpen(false)}
           />
           <div className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-zinc-950 rounded-[3rem] overflow-hidden shadow-2xl flex flex-col border border-zinc-200 dark:border-zinc-800 animate-in fade-in zoom-in duration-300">
-            {/* ... Modal Header ... */}
             <div className="p-8 border-b border-zinc-100 dark:border-zinc-900 flex justify-between items-center">
               <div>
                 <h2 className="text-3xl font-black dark:text-white uppercase tracking-tighter">
@@ -344,10 +291,9 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                 <X size={20} />
               </button>
             </div>
-            {/* ... Modal Content (Kept as is) ... */}
             <div className="flex-1 overflow-y-auto p-8 md:p-12 space-y-16">
               <div>
-                <h4 className="text-[#007AFF] font-mono text-xs font-black uppercase mb-6">
+                <h4 className="text-[#007AFF] font-mono text-xs font-black uppercase  mb-6">
                   Education
                 </h4>
                 <div className="space-y-2">
@@ -391,7 +337,6 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                   </div>
                 </div>
               </div>
-              {/* ... Tech Grid in Modal ... */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-8 pb-12">
                 <div>
                   <h4 className="text-[#007AFF] font-mono text-xs uppercase mb-4">
@@ -418,10 +363,9 @@ const Home: React.FC<{ isDark: boolean }> = ({ isDark }) => {
                 </div>
               </div>
             </div>
-            {/* ... Modal Footer ... */}
             <div className="p-8 bg-zinc-50 dark:bg-zinc-900/50 flex flex-col md:flex-row gap-4 justify-between items-center">
               <p className="text-xs text-zinc-500 max-w-xs italic text-center md:text-left">
-                Kochi , Kerala.
+                Located in Kochi, Kerala.
               </p>
               <a
                 href="/Alwin_Joseph_Resume.pdf"
