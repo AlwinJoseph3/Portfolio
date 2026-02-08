@@ -19,7 +19,7 @@ const TechHalo = () => {
           color={"#FFFFFF"}
           wireframe={true}
           transparent
-          opacity={100}
+          opacity={1}
           roughness={1}
           metalness={0}
         />
@@ -30,11 +30,13 @@ const TechHalo = () => {
 
 const AboutMe = () => {
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-        {/* Column 1: Profile Image + 3D Background */}
-        <div className="md:col-span-5 relative h-[500px] flex items-center justify-center group">
-          {/* 3D Canvas Layer (Static Position) */}
+    // Responsive Padding: py-16 mobile -> py-24 desktop
+    <section className="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+        {/* Column 1: 3D Shape 
+            Height: h-[300px] mobile -> h-[500px] desktop
+        */}
+        <div className="md:col-span-5 relative h-[300px] md:h-[500px] flex items-center justify-center group w-full">
           <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
             <Canvas camera={{ position: [0, 0, 5] }}>
               <ambientLight intensity={0.5} />
@@ -44,21 +46,17 @@ const AboutMe = () => {
           </div>
         </div>
 
-        {/* Column 2: Text Content */}
-        <div className="md:col-span-7 flex flex-col justify-center">
+        {/* Column 2: Text Content 
+            Alignment: Center mobile -> Left desktop
+        */}
+        <div className="md:col-span-7 flex flex-col justify-center text-center md:text-left">
           <div>
-            {/* <div className="flex items-center gap-3 mb-8">
-              <span className="text-xs font-mono text-[#007AFF] uppercase tracking-[0.4em] font-bold">
-                // 01. About Me
-              </span>
-              <div className="h-px w-20 bg-[#007AFF]/30" />
-            </div> */}
-
-            <h3 className="text-5xl font-black text-white uppercase tracking-tighter mb-10">
+            {/* Font Size: 4xl mobile -> 5xl desktop */}
+            <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 md:mb-10">
               About me
             </h3>
 
-            <div className="space-y-6 text-lg text-zinc-400 leading-relaxed max-w-xl">
+            <div className="space-y-6 text-base md:text-lg text-zinc-400 leading-relaxed max-w-xl mx-auto md:mx-0">
               <p>
                 I'm{" "}
                 <span className="font-bold text-[#007AFF]">Alwin Joseph</span>,

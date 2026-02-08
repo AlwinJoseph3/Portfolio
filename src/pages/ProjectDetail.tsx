@@ -1,14 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { projectData } from "../data/projects";
-// Removed Project3DViewer import
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Sparkles, ArrowRight } from "lucide-react";
+import Starfield from "../components/StarBackground";
 
-const ProjectDetail: React.FC<{ isDark: boolean }> = ({}) => {
+const ProjectDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  // Using the structured data we created earlier
-  const project = projectData[id || "1"];
+
+  // Logic for Next Project Navigation
+  const projects = Object.values(projectData);
+  const currentIndex = projects.findIndex((p) => p.id === id);
+  const project = projects[currentIndex];
+  const nextProject = projects[(currentIndex + 1) % projects.length];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,154 +20,212 @@ const ProjectDetail: React.FC<{ isDark: boolean }> = ({}) => {
 
   if (!project)
     return (
-      <div className="p-20 text-center dark:text-white">Project Not Found</div>
+      <div className="min-h-screen flex items-center justify-center text-white">
+        Project Not Found
+      </div>
     );
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0a0a0a] transition-colors">
-      <div className="pt-32 px-6 max-w-7xl mx-auto pb-32">
+    <div className="min-h-screen bg-[#020617] selection:bg-[#007AFF] selection:text-white overflow-x-hidden">
+      <Starfield />
+
+      {/* DYNAMIC BACKGROUND GLOW */}
+      <div
+        className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full blur-[150px] opacity-20 pointer-events-none"
+        style={{ backgroundColor: project.colors?.[0] || "#007AFF" }}
+      />
+
+      <div className="relative z-10 pt-20 sm:pt-24 md:pt-32 px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto pb-20 sm:pb-32">
+        {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-zinc-500 hover:text-brand-primary mb-12 group"
+          className="flex items-center gap-2 text-zinc-500 hover:text-white mb-10 sm:mb-16 group transition-colors uppercase text-[10px] sm:text-xs font-bold tracking-widest"
         >
           <ArrowLeft
-            size={20}
+            size={16}
             className="group-hover:-translate-x-1 transition-transform"
-          />{" "}
-          Back to Home
+          />
+          Back to Index
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
-          <div className="lg:col-span-7">
-            <h1 className="text-7xl md:text-8xl font-black tracking-tighter dark:text-white uppercase mb-8">
-              {project.name}
-            </h1>
-            <div className="flex items-center gap-4 mb-8">
-              <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
-              <span className="font-mono text-zinc-400 text-sm italic">
-                Status: {project.progress}
-              </span>
-            </div>
-            <p className="text-2xl text-zinc-500 dark:text-zinc-400 leading-relaxed">
-              {project.description}
-            </p>
+        {/* 1. HERO BLOCK */}
+        <div className="flex flex-col mb-16 sm:mb-24">
+          <div className="flex items-center gap-4 mb-4 sm:mb-6">
+            <span className="px-3 py-1 rounded-full border border-zinc-700 bg-zinc-900/50 text-[10px] sm:text-xs font-mono text-[#007AFF] uppercase tracking-widest">
+              {project.category || "Web Experiment"}
+            </span>
           </div>
 
-          <div className="lg:col-span-5 flex flex-col justify-end gap-10">
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-widest text-brand-primary mb-4">
-                Tech Stack
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {project.techStack.map((t) => (
-                  <span
-                    key={t}
-                    className="px-4 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 text-xs dark:text-white uppercase"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black tracking-tighter text-white uppercase leading-[0.85] mb-8 sm:mb-10">
+            {project.name}
+          </h1>
+
+          <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 items-start lg:items-end justify-between">
+            <div className="max-w-2xl">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 uppercase tracking-tight">
+                The Gist
+              </h3>
+              <p className="text-lg sm:text-xl md:text-2xl text-zinc-400 leading-relaxed">
+                {project.description}
+              </p>
             </div>
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-5 bg-[#007AFF] text-white rounded-full font-bold hover:scale-[1.02] transition-transform flex items-center justify-center gap-3 shadow-xl shadow-brand-primary/20"
-            >
-              Show me <ExternalLink size={18} />
-            </a>
+
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full sm:w-auto justify-center group flex items-center gap-3 sm:gap-4 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-black uppercase tracking-tighter rounded-full hover:bg-[#007AFF] hover:text-white transition-all shadow-xl hover:shadow-[#007AFF]/20 text-sm sm:text-base"
+              >
+                Visit Site <ExternalLink size={16} className="sm:w-[18px]" />
+              </a>
+            )}
           </div>
         </div>
 
-        {/* Updated: Landscape Hero Image replaces 3D Viewer */}
-        <section className="mb-32">
-          <div className="relative w-full h-[500px] md:h-[650px] overflow-hidden rounded-[3rem] border border-zinc-200 dark:border-zinc-800 shadow-2xl">
-            <img
-              src={project.mockupimage}
-              alt={`${project.name} expedition landscape`}
-              className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700"
-            />
-            {/* Gradient Overlay for a more cinematic feel */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
-            <div className="absolute bottom-10 left-10 text-white">
-              <span className="font-mono text-xs uppercase tracking-widest opacity-70">
-                Project Visual
-              </span>
-              <h3 className="text-2xl font-black uppercase">
-                Cinematic Experience
-              </h3>
-            </div>
-          </div>
-        </section>
-
-        {/* Color Palette Section */}
-        <section className="mb-32 py-20 border-y-4 border-zinc-100 dark:border-y dark:border-zinc-900">
-          <div className="flex flex-col md:flex-row justify-between items-start gap-12">
-            <div className="max-w-md">
-              <h2 className="text-4xl font-black dark:text-white uppercase tracking-tighter ">
-                Color Palette
-              </h2>
-            </div>
-            <div className="flex gap-4">
-              {project.colors?.map((color, idx) => (
-                <div key={idx} className="flex flex-col items-center gap-3">
-                  <div
-                    className="w-20 h-20 md:w-24 md:h-24 rounded-3xl shadow-xl border border-white/10"
-                    style={{ backgroundColor: color }}
-                  />
-                  <span className="font-mono text-[10px] uppercase dark:text-zinc-500 tracking-widest">
-                    {color}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="py-20"></div>
-          <div className="flex flex-col md:flex-row justify-between items-start gap-12">
-            <div className="max-w-md">
-              <h2 className="text-4xl font-black dark:text-white uppercase tracking-tighter ">
-                Typography
-              </h2>
-            </div>
-            <div className="flex items-end gap-6 dark:text-white">
-              <span className="text-7xl font-black uppercase">Aa</span>
-              <div className="flex flex-col gap-1">
-                <span className="text-2xl font-bold italic tracking-tight">
-                  Inter Tight
-                </span>
-                <span className="text-xs font-mono text-zinc-500">
-                  Bold / Medium / Regular
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* UI Gallery */}
-        <section>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mb-20 items-center">
-            <h2 className="text-4xl font-black dark:text-white uppercase tracking-tighter">
-              UI Strategy & Approach
-            </h2>
-            <p className="text-zinc-500 leading-relaxed border-l-2 border-brand-primary pl-8">
-              {project.uiStrategy}
+        {/* 2. THE STORY */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mb-20 sm:mb-32 border-t border-zinc-800 pt-12 sm:pt-20">
+          <div className="lg:col-span-4">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-2">
+              The Backstory
+            </h3>
+            <p className="font-mono text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">
+              // Context & Motivation
             </p>
           </div>
+          <div className="lg:col-span-8 space-y-6 sm:space-y-8 text-base sm:text-lg text-zinc-400 leading-relaxed">
+            {project.story}
+          </div>
+        </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* 3. TECH STACK (NEW SECTION) */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mb-20 sm:mb-32 border-t border-zinc-800 pt-12 sm:pt-20">
+          <div className="lg:col-span-4">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-2">
+              The Stack
+            </h3>
+            <p className="font-mono text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">
+              // Technologies & Tools
+            </p>
+          </div>
+          <div className="lg:col-span-8 flex flex-wrap content-start gap-3 sm:gap-4">
+            {project.techStack?.map((tech, idx) => (
+              <div
+                key={idx}
+                className="px-4 py-2 sm:px-5 sm:py-3 rounded-lg border border-white/10 bg-zinc-900/50 text-xs sm:text-sm font-bold text-zinc-300 uppercase tracking-wide hover:border-[#007AFF] hover:text-white transition-colors"
+              >
+                {tech}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 4. CENTERPIECE MOCKUP */}
+        <div className="relative w-full h-auto mb-20 sm:mb-32 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl group">
+          <img
+            src={project.mockupimage}
+            alt="Hero"
+            className="w-full h-auto block group-hover:scale-[1.02] transition-transform duration-700"
+          />
+        </div>
+
+        {/* 5. DESIGN DNA (Colors & Type) */}
+        <section className="mb-20 sm:mb-32 bg-zinc-900/30 border border-white/5 p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[3rem]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center">
+            {/* Colors */}
+            <div>
+              <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                <Sparkles size={20} className="text-[#007AFF]" />
+                <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tighter">
+                  Color Palette
+                </h3>
+              </div>
+              <p className="text-sm sm:text-base text-zinc-400 mb-6 sm:mb-8 leading-relaxed">
+                {project.colortheme}
+              </p>
+              <div className="flex gap-3 sm:gap-4 flex-wrap">
+                {project.colors?.map((color, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col gap-2 sm:gap-3 group cursor-pointer"
+                  >
+                    <div
+                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border border-white/10 shadow-lg group-hover:scale-110 transition-transform"
+                      style={{ backgroundColor: color }}
+                    />
+                    <span className="font-mono text-[9px] sm:text-[10px] text-zinc-500 text-center uppercase group-hover:text-white">
+                      {color}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Typography */}
+            <div className="flex flex-col items-start lg:items-end text-left lg:text-right border-t lg:border-t-0 lg:border-l border-zinc-800 pt-8 lg:pt-0 pl-0 lg:pl-12 w-full">
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
+                Typography
+              </span>
+              <p
+                className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight mb-2 break-all sm:break-normal"
+                style={{ fontFamily: project.font }}
+              >
+                {project.fontname}
+              </p>
+              <p className="text-sm sm:text-base text-zinc-400 max-w-xs">
+                {project.fonttheme}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. GALLERY - UPDATED GRID LOGIC */}
+        <section className="space-y-8 sm:space-y-12 mb-20 sm:mb-32">
+          <div className="text-center">
+            <h3 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tighter">
+              Visuals
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {project.screenshots.map((ss, idx) => (
               <div
                 key={idx}
-                className="bg-zinc-100 dark:bg-zinc-900 rounded-[2rem] border border-zinc-200 dark:border-zinc-800 overflow-hidden"
+                className="rounded-2xl sm:rounded-3xl border border-white/5 bg-zinc-900/50 overflow-hidden hover:border-[#007AFF]/30 transition-all duration-500 group"
               >
-                <img
-                  src={ss}
-                  alt={`Screenshot ${idx + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                {/* Removed aspect ratio classes to allow full height image display */}
+                <div className="w-full h-auto">
+                  <img
+                    src={ss}
+                    alt={`Capture ${idx}`}
+                    className="w-full h-auto object-cover block group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* 7. NEXT PROJECT NAVIGATOR */}
+        <section
+          onClick={() => navigate(`/project/${nextProject.id}`)}
+          className="group relative w-full py-12 sm:py-20 border-t border-zinc-800 cursor-pointer"
+        >
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+              <span className="font-mono text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest mb-2 block group-hover:text-[#007AFF] transition-colors">
+                Up Next
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-7xl font-black text-white uppercase tracking-tighter group-hover:translate-x-2 transition-transform duration-500">
+                {nextProject.name}
+              </h2>
+            </div>
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border border-zinc-700 flex items-center justify-center text-white group-hover:bg-[#007AFF] group-hover:border-[#007AFF] transition-all duration-300">
+              <ArrowRight
+                size={24}
+                className="sm:w-8 sm:h-8 -rotate-45 group-hover:rotate-0 transition-transform"
+              />
+            </div>
           </div>
         </section>
       </div>
