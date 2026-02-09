@@ -46,10 +46,6 @@ const Home = ({}) => {
             <p className="text-white dark:text-white font-bold tracking-widest uppercase opacity-80 text-[10px] sm:text-xs md:text-sm lg:text-base">
               Frontend Dev • UI/UX • Graphics
             </p>
-
-            <p className="text-zinc-300 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed max-w-xs sm:max-w-lg md:max-w-xl mx-auto">
-              I build things for the web that look good and work even better.
-            </p>
           </div>
 
           <button
@@ -73,7 +69,7 @@ const Home = ({}) => {
         <div className="flex flex-col lg:flex-row justify-between items-end mb-8 sm:mb-12 gap-6 sm:gap-8">
           <div className="max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter mb-4">
-              Selected Works
+              Projects
             </h2>
             <p className="text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed">
               I believe the best way to learn is by building. Here’s a
