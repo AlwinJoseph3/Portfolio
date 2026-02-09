@@ -50,9 +50,8 @@ const AboutMe = () => {
 
             <div className="space-y-6 text-base md:text-lg text-zinc-400 leading-relaxed max-w-xl mx-auto md:mx-0">
               <p>
-                I'm{" "}
-                <span className="font-bold text-[#007AFF]">Alwin Joseph</span>,
-                a passionate frontend developer with a knack for crafting
+                I'm <span className="font-bold text-[#007AFF]">Alwin</span>, a
+                passionate frontend developer with a knack for crafting
                 immersive digital experiences. With experience in design and a
                 love for clean code, I specialize in building intuitive
                 interfaces that blend aesthetics with functionality.

@@ -260,10 +260,10 @@ const Home = ({}) => {
 
             <div className="p-5 sm:p-6 md:p-8 bg-zinc-900/50 flex flex-col md:flex-row gap-4 justify-between items-center">
               <p className="text-[10px] sm:text-xs text-zinc-500 max-w-xs italic text-center md:text-left">
-                Located in Kochi, Kerala.
+                Kochi, Kerala.
               </p>
               <a
-                href="/Alwin_Joseph_Resume.pdf"
+                href="/Resume.pdf"
                 download
                 className="w-full md:w-auto justify-center px-6 py-3 bg-zinc-800 border border-zinc-700 rounded-full text-xs font-bold text-white flex items-center gap-2 hover:bg-[#007AFF] hover:text-white transition-all shadow-md"
               >

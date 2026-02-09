@@ -85,7 +85,7 @@ export const projectData: Record<string, Project> = {
     font: "'Cabin' ,sans-serif",
     fonttheme:
       "Friendly, rounded sans-serif with a humanist touch to evoke warmth and approachability in the culinary community.",
-    techStack: ["Flutter", "Dart", "Firebase", "Adobe Illustrator"],
+    techStack: ["Flutter", "Firebase"],
     screenshots: [
       "/assets/HomeChef/home.png",
       "/assets/HomeChef/listing.png",

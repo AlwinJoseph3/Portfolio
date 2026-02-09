@@ -75,9 +75,6 @@ const ProjectDetail = () => {
 
           <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 items-start lg:items-end justify-between">
             <div className="max-w-2xl">
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 uppercase tracking-tight">
-                The Gist
-              </h3>
               <p className="text-lg sm:text-xl md:text-2xl text-zinc-400 leading-relaxed">
                 {project.description}
               </p>
