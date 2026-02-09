@@ -37,9 +37,7 @@ const Loader = () => {
           }}
           className="fixed inset-0 z-[200] bg-[#0a0a0a] flex flex-col items-center justify-center"
         >
-          {/* Main Progress Logic */}
           <div className="flex flex-col items-center">
-            {/* The Rolling Number Window */}
             <div className="h-12 overflow-hidden flex items-baseline gap-2">
               <span className="text-zinc-500 font-mono text-xs tracking-widest mb-1">
                 initializing components ...
@@ -64,7 +62,6 @@ const Loader = () => {
               </div>
             </div>
 
-            {/* Subtle Progress Bar */}
             <div className="mt-4 relative w-48 h-[1px] bg-zinc-900 overflow-hidden">
               <motion.div
                 className="absolute top-0 left-0 h-full bg-[#007AFF]"
@@ -74,7 +71,6 @@ const Loader = () => {
             </div>
           </div>
 
-          {/* Localization Tag */}
           <div className="absolute bottom-12 flex flex-col items-center gap-2">
             <div className="flex gap-4">
               <span className="w-1 h-1 rounded-full bg-zinc-800 animate-ping" />

@@ -36,7 +36,6 @@ const TechStack = () => {
   return (
     <section className="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto relative z-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-        {/* LEFT COLUMN: Categorized List */}
         <div className="space-y-12 md:space-y-16 order-2 lg:order-1">
           <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 md:mb-10 text-center lg:text-left">
             Tech Stack
@@ -46,7 +45,7 @@ const TechStack = () => {
             {techCategories.map((category) => (
               <div key={category.id} className="group text-center lg:text-left">
                 <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block mb-4">
-                  // {category.id}. {category.label}
+                  {category.label}
                 </span>
 
                 <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-4 md:gap-x-8">
@@ -55,14 +54,12 @@ const TechStack = () => {
                       key={skill.name}
                       className="flex items-center gap-3 group/item cursor-default"
                     >
-                      {/* Logo Image */}
                       <img
                         src={skill.icon}
                         alt={skill.name}
                         className="w-5 h-5 md:w-6 md:h-6 opacity-70 group-hover/item:opacity-100 transition-opacity"
                       />
 
-                      {/* Tech Name */}
                       <span className="text-xl md:text-2xl font-bold text-white uppercase hover:text-[#007AFF] transition-colors">
                         {skill.name}
                       </span>
@@ -74,7 +71,6 @@ const TechStack = () => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: The Logic Knot */}
         <div className="h-[300px] md:h-[700px] relative pointer-events-none order-1 lg:order-2">
           <Canvas camera={{ position: [0, 0, 5] }}>
             <ambientLight intensity={1} />

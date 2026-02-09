@@ -30,12 +30,8 @@ const TechHalo = () => {
 
 const AboutMe = () => {
   return (
-    // Responsive Padding: py-16 mobile -> py-24 desktop
     <section className="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-        {/* Column 1: 3D Shape 
-            Height: h-[300px] mobile -> h-[500px] desktop
-        */}
         <div className="md:col-span-5 relative h-[300px] md:h-[500px] flex items-center justify-center group w-full">
           <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
             <Canvas camera={{ position: [0, 0, 5] }}>
@@ -46,12 +42,8 @@ const AboutMe = () => {
           </div>
         </div>
 
-        {/* Column 2: Text Content 
-            Alignment: Center mobile -> Left desktop
-        */}
         <div className="md:col-span-7 flex flex-col justify-center text-center md:text-left">
           <div>
-            {/* Font Size: 4xl mobile -> 5xl desktop */}
             <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 md:mb-10">
               About me
             </h3>

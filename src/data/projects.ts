@@ -49,19 +49,19 @@ export const projectData: Record<string, Project> = {
     category: "Mobile App",
     name: "Smart Health Management System",
     description:
-      "An integrated healthcare ecosystem utilizing Pegasus and YOLOv5 models to automate medical data summarization and scan analysis, synced with real-time wearable vitals.",
+      "An integrated healthcare ecosystem utilizing Pegasus and YOLOv5 models to automate medical data summarization and scan analysis, synced with real-time vitals from wearable patch.",
     link: "https://github.com/AlwinJoseph3/shms_fixed",
     story:
-      "The Smart Health Management System (SHMS) was conceived from a desire to revolutionize healthcare through technology. The idea came about during a hospital visit, where I observed the challenges medical professionals face in managing patient data and providing timely care. I envisioned an integrated ecosystem that could automate medical data summarization and scan analysis, while also syncing with real-time wearable vitals. The development of SHMS has been a rewarding journey, combining my passion for healthcare innovation with cutting-edge AI technologies to create a tool that can truly make a difference in patient care.",
-    mockupimage: "/assets/SHMS/mockup.png",
+      "SHMS was conceived from a desire to revolutionize healthcare through technology. This was our final year project, and we wanted to create something that could have a real impact on people's lives. The idea was to build an integrated healthcare ecosystem that not only automates medical data summarization but also analyzes medical scans using advanced models like Pegasus and YOLOv5. We also wanted to incorporate real-time vitals monitoring through a wearable patch, creating a comprehensive solution for patients. The development of SHMS has been an incredible journey, blending cutting-edge technology with a passion for improving healthcare outcomes through AI.",
+    techStack: ["Python", "Yolov5", "Pegasus"],
+    mockupimage: "/assets/SHMS/shms.png",
     colortheme:
-      "Clean, clinical 'Light Mode' interface with calming teal accents, focusing on data visualization and accessibility for medical professionals.",
+      "Clean, clinical 'Light Mode' interface with calming blue accents.",
     colors: ["#2196f3", "#ffffff"],
     fontname: "Inter",
     font: "Inter",
     fonttheme:
       "Modern, highly legible sans-serif with a neutral tone to ensure clarity and professionalism in medical contexts.",
-    techStack: ["Python", "PyTorch", "TensorFlow", "Flutter"],
     screenshots: [
       "/assets/SHMS/home.png",
       "/assets/SHMS/report.png",
@@ -73,11 +73,11 @@ export const projectData: Record<string, Project> = {
     category: "Mobile App",
     name: "HomeChef",
     description:
-      "A hyperlocal marketplace connecting skilled home cooks with neighbors, designed to foster community through shared culinary experiences.",
+      "A marketplace for home cooks where they can list and sell their fresh, homemade meals at affordable rates. ",
     link: "https://github.com/AlwinJoseph3/homechef",
     story:
-      "HomeChef was born from a passion for food and community. The idea sparked during a neighborhood potluck, where I realized how many talented home cooks were eager to share their culinary creations. I wanted to create a platform that not only connects these skilled cooks with their neighbors but also fosters a sense of community through shared meals. The development of HomeChef has been an exciting journey, blending my love for design, technology, and food to create an app that brings people together through the joy of cooking and eating.",
-    mockupimage: "/assets/HomeChef/mockup.png",
+      "HomeChef was born from a passion for food and community. This was our mini project. We wanted to create a platform that enables homecooks to earn from their culinary skills. The idea emerged from the realization that many students and working professionals find it hard to cook or find affordable, home-cooked meals. Building HomeChef was an exciting journey, blending my love for design and technology with a desire to foster community through shared culinary experiences.",
+    mockupimage: "/assets/HomeChef/homechef.png",
     colortheme:
       "Soft, inviting aesthetic using a deep purple and white for an approachable feel.",
     colors: ["#673Ab7", "#FFFFFF", "#000000"],

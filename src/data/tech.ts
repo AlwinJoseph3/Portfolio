@@ -1,8 +1,6 @@
-// src/data/tech.ts
-
 export interface Skill {
   name: string;
-  icon: string; // We will use CDN URLs for lightweight SVGs
+  icon: string;
 }
 
 export interface TechCategory {
@@ -48,7 +46,7 @@ export const techCategories: TechCategory[] = [
     label: "Backend & Infrastructure",
     skills: [
       { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs" },
-      { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql" },
+      // { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql" },
       { name: "Firebase", icon: "https://cdn.simpleicons.org/firebase" },
       { name: "Netlify", icon: "https://cdn.simpleicons.org/netlify" },
     ],

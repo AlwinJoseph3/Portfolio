@@ -8,7 +8,6 @@ const ProjectDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Logic for Next Project Navigation
   const projects = Object.values(projectData);
   const currentIndex = projects.findIndex((p) => p.id === id);
   const project = projects[currentIndex];
@@ -29,14 +28,12 @@ const ProjectDetail = () => {
     <div className="min-h-screen bg-[#020617] selection:bg-[#007AFF] selection:text-white overflow-x-hidden">
       <Starfield />
 
-      {/* DYNAMIC BACKGROUND GLOW */}
       <div
         className="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full blur-[150px] opacity-20 pointer-events-none"
         style={{ backgroundColor: project.colors?.[0] || "#007AFF" }}
       />
 
       <div className="relative z-10 pt-20 sm:pt-24 md:pt-32 px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto pb-20 sm:pb-32">
-        {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-zinc-500 hover:text-white mb-10 sm:mb-16 group transition-colors uppercase text-[10px] sm:text-xs font-bold tracking-widest"
@@ -48,7 +45,7 @@ const ProjectDetail = () => {
           Back to Index
         </button>
 
-        {/* 1. HERO BLOCK */}
+        {/*MAIN BLOCK */}
         <div className="flex flex-col mb-16 sm:mb-24">
           <div className="flex items-center gap-4 mb-4 sm:mb-6">
             <span className="px-3 py-1 rounded-full border border-zinc-700 bg-zinc-900/50 text-[10px] sm:text-xs font-mono text-[#007AFF] uppercase tracking-widest">
@@ -83,30 +80,24 @@ const ProjectDetail = () => {
           </div>
         </div>
 
-        {/* 2. THE STORY */}
+        {/*BACKSTORY */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mb-20 sm:mb-32 border-t border-zinc-800 pt-12 sm:pt-20">
           <div className="lg:col-span-4">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-2">
               The Backstory
             </h3>
-            <p className="font-mono text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">
-              // Context & Motivation
-            </p>
           </div>
           <div className="lg:col-span-8 space-y-6 sm:space-y-8 text-base sm:text-lg text-zinc-400 leading-relaxed">
             {project.story}
           </div>
         </section>
 
-        {/* 3. TECH STACK (NEW SECTION) */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mb-20 sm:mb-32 border-t border-zinc-800 pt-12 sm:pt-20">
+        {/*TECH STACK*/}
+        <section className="flex justify-around grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mb-20 sm:mb-32 border-t border-zinc-800 pt-12 sm:pt-20">
           <div className="lg:col-span-4">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-2">
-              The Stack
+              Tech Stack
             </h3>
-            <p className="font-mono text-[10px] sm:text-xs text-zinc-500 uppercase tracking-widest">
-              // Technologies & Tools
-            </p>
           </div>
           <div className="lg:col-span-8 flex flex-wrap content-start gap-3 sm:gap-4">
             {project.techStack?.map((tech, idx) => (
@@ -120,7 +111,7 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        {/* 4. CENTERPIECE MOCKUP */}
+        {/* MOCKUP */}
         <div className="relative w-full h-auto mb-20 sm:mb-32 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl group">
           <img
             src={project.mockupimage}
@@ -129,10 +120,10 @@ const ProjectDetail = () => {
           />
         </div>
 
-        {/* 5. DESIGN DNA (Colors & Type) */}
+        {/*COLORS TYPOGRAPHY*/}
         <section className="mb-20 sm:mb-32 bg-zinc-900/30 border border-white/5 p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[3rem]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center">
-            {/* Colors */}
+            {/* COLORS */}
             <div>
               <div className="flex items-center gap-3 mb-6 sm:mb-8">
                 <Sparkles size={20} className="text-[#007AFF]" />
@@ -161,7 +152,7 @@ const ProjectDetail = () => {
               </div>
             </div>
 
-            {/* Typography */}
+            {/* TYPOGRAPHY */}
             <div className="flex flex-col items-start lg:items-end text-left lg:text-right border-t lg:border-t-0 lg:border-l border-zinc-800 pt-8 lg:pt-0 pl-0 lg:pl-12 w-full">
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
                 Typography
@@ -179,7 +170,7 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        {/* 6. GALLERY - UPDATED GRID LOGIC */}
+        {/* SCREENSHOTS */}
         <section className="space-y-8 sm:space-y-12 mb-20 sm:mb-32">
           <div className="text-center">
             <h3 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tighter">
@@ -193,7 +184,6 @@ const ProjectDetail = () => {
                 key={idx}
                 className="rounded-2xl sm:rounded-3xl border border-white/5 bg-zinc-900/50 overflow-hidden hover:border-[#007AFF]/30 transition-all duration-500 group"
               >
-                {/* Removed aspect ratio classes to allow full height image display */}
                 <div className="w-full h-auto">
                   <img
                     src={ss}
@@ -206,7 +196,7 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        {/* 7. NEXT PROJECT NAVIGATOR */}
+        {/* NEXT PROJECT */}
         <section
           onClick={() => navigate(`/project/${nextProject.id}`)}
           className="group relative w-full py-12 sm:py-20 border-t border-zinc-800 cursor-pointer"

@@ -4,7 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Minimalist global reset */
 body {
   @apply bg-black;
   margin: 0;
@@ -27,7 +26,6 @@ body {
   width: max-content;
 }
 
-/* --- SCROLLBAR HIDDEN --- */
 @layer base {
   ::-webkit-scrollbar {
     display: none;
@@ -40,17 +38,17 @@ body {
 
 .stars-static {
   background-image: 
-    /* Layer 1: Tiny Stars */
+    /* Star S */
     radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0, 0, 0, 0)),
     radial-gradient(1px 1px at 100px 50px, #ffffff, rgba(0, 0, 0, 0)),
     radial-gradient(1px 1px at 200px 150px, #ffffff, rgba(0, 0, 0, 0)),
     radial-gradient(1px 1px at 300px 250px, #ffffff, rgba(0, 0, 0, 0)),
     radial-gradient(1px 1px at 450px 100px, #ffffff, rgba(0, 0, 0, 0)),
-    /* Layer 2: Medium Stars */
+    /* Star M */
     radial-gradient(1.5px 1.5px at 70px 180px, #ffffff, rgba(0, 0, 0, 0)),
     radial-gradient(1.5px 1.5px at 280px 40px, #ffffff, rgba(0, 0, 0, 0)),
     radial-gradient(1.5px 1.5px at 350px 350px, #ffffff, rgba(0, 0, 0, 0)),
-    /* Layer 3: Faint Distant Stars */
+    /* Distant Stars */
     radial-gradient(1px 1px at 400px 400px, #60a5fa, rgba(0, 0, 0, 0));
 
   background-size: 550px 550px;

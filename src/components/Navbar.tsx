@@ -7,11 +7,10 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-[100] px-6 md:px-12 py-6 flex justify-between items-center backdrop-blur-xl bg-black/10 border-b border-white/5">
-      {/* Logo - Always goes to top of home */}
       <NavHashLink
         smooth
         to="/#"
-        className="z-[110]"
+        className="z-[110] brightness-0 invert"
         onClick={() => setIsOpen(false)}
       >
         <img
@@ -21,7 +20,6 @@ const Navbar = () => {
         />
       </NavHashLink>
 
-      {/* Desktop Menu */}
       <div className="hidden md:flex items-center gap-10">
         <NavHashLink
           smooth
@@ -39,7 +37,6 @@ const Navbar = () => {
         </NavHashLink>
       </div>
 
-      {/* Mobile Toggle & Menu logic... (same as before but use NavHashLink) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="md:hidden z-[110] text-white"
