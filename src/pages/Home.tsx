@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Sphere, MeshDistortMaterial } from "@react-three/drei";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,6 +15,15 @@ const Home = ({}) => {
   const navigate = useNavigate();
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const projects = Object.values(projectData);
+
+  useEffect(() => {
+    projects.forEach((project) => {
+      if (project.mockupimage) {
+        const img = new Image();
+        img.src = project.mockupimage;
+      }
+    });
+  }, [projects]);
 
   return (
     <main className="min-h-screen selection:bg-[#007AFF] selection:text-white overflow-x-hidden">

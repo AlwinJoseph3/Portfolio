@@ -35,14 +35,15 @@ const ProjectDetail = () => {
 
       <div className="relative z-10 pt-20 sm:pt-24 md:pt-32 px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto pb-20 sm:pb-32">
         <button
-          onClick={() => navigate(-1)}
+          // FIX: Changed from navigate(-1) to navigate("/")
+          onClick={() => navigate("/")}
           className="flex items-center gap-2 text-zinc-500 hover:text-white mb-10 sm:mb-16 group transition-colors uppercase text-[10px] sm:text-xs font-bold tracking-widest"
         >
           <ArrowLeft
             size={16}
             className="group-hover:-translate-x-1 transition-transform"
           />
-          Back to Index
+          Back to Home
         </button>
 
         {/*MAIN BLOCK */}
@@ -116,7 +117,11 @@ const ProjectDetail = () => {
           <img
             src={project.mockupimage}
             alt="Hero"
-            className="w-full h-auto block group-hover:scale-[1.02] transition-transform duration-700"
+            onLoad={(e) => {
+              e.currentTarget.parentElement?.classList.remove("animate-pulse");
+            }}
+            className="w-full h-full object-cover transition-opacity duration-700 opacity-0"
+            style={{ opacity: 1 }}
           />
         </div>
 
