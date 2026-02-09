@@ -1,17 +1,44 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { projectData } from "../data/projects";
-import { ArrowLeft, ExternalLink, Sparkles, ArrowRight } from "lucide-react";
+import { ArrowLeft, ExternalLink, Sparkles } from "lucide-react";
 import Starfield from "../components/StarBackground";
+
+const ImageWithLoader = ({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div
+      className={`relative w-full h-full bg-zinc-900 ${!loaded ? "animate-pulse" : ""} ${className}`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setLoaded(true)}
+        className={`w-full h-full object-cover transition-opacity duration-700 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+    </div>
+  );
+};
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const projects = Object.values(projectData);
   const currentIndex = projects.findIndex((p) => p.id === id);
   const project = projects[currentIndex];
-  const nextProject = projects[(currentIndex + 1) % projects.length];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -34,19 +61,7 @@ const ProjectDetail = () => {
       />
 
       <div className="relative z-10 pt-20 sm:pt-24 md:pt-32 px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto pb-20 sm:pb-32">
-        <button
-          // FIX: Changed from navigate(-1) to navigate("/")
-          onClick={() => navigate("/")}
-          className="flex items-center gap-2 text-zinc-500 hover:text-white mb-10 sm:mb-16 group transition-colors uppercase text-[10px] sm:text-xs font-bold tracking-widest"
-        >
-          <ArrowLeft
-            size={16}
-            className="group-hover:-translate-x-1 transition-transform"
-          />
-          Back to Home
-        </button>
-
-        {/*MAIN BLOCK */}
+        {/* MAIN BLOCK */}
         <div className="flex flex-col mb-16 sm:mb-24">
           <div className="flex items-center gap-4 mb-4 sm:mb-6">
             <span className="px-3 py-1 rounded-full border border-zinc-700 bg-zinc-900/50 text-[10px] sm:text-xs font-mono text-[#007AFF] uppercase tracking-widest">
@@ -81,7 +96,7 @@ const ProjectDetail = () => {
           </div>
         </div>
 
-        {/*BACKSTORY */}
+        {/* BACKSTORY */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mb-20 sm:mb-32 border-t border-zinc-800 pt-12 sm:pt-20">
           <div className="lg:col-span-4">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-2">
@@ -93,7 +108,7 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        {/*TECH STACK*/}
+        {/* TECH STACK */}
         <section className="flex justify-around grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mb-20 sm:mb-32 border-t border-zinc-800 pt-12 sm:pt-20">
           <div className="lg:col-span-4">
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-2">
@@ -112,20 +127,23 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        {/* MOCKUP */}
-        <div className="relative w-full h-auto mb-20 sm:mb-32 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl group">
+        {/* MOCKUP (Using local state as before) */}
+        <div
+          className={`relative w-full h-auto mb-20 rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-zinc-900 ${
+            !isLoaded ? "animate-pulse" : ""
+          }`}
+        >
           <img
             src={project.mockupimage}
             alt="Hero"
-            onLoad={(e) => {
-              e.currentTarget.parentElement?.classList.remove("animate-pulse");
-            }}
-            className="w-full h-full object-cover transition-opacity duration-700 opacity-0"
-            style={{ opacity: 1 }}
+            onLoad={() => setIsLoaded(true)}
+            className={`w-full h-full object-cover transition-opacity duration-700 ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
           />
         </div>
 
-        {/*COLORS TYPOGRAPHY*/}
+        {/* COLORS & TYPOGRAPHY */}
         <section className="mb-20 sm:mb-32 bg-zinc-900/30 border border-white/5 p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[3rem]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center">
             {/* COLORS */}
@@ -175,7 +193,7 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        {/* SCREENSHOTS */}
+        {/* SCREENSHOTS (Using the new component) */}
         <section className="space-y-8 sm:space-y-12 mb-20 sm:mb-32">
           <div className="text-center">
             <h3 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tighter">
@@ -187,42 +205,28 @@ const ProjectDetail = () => {
             {project.screenshots.map((ss, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl sm:rounded-3xl border border-white/5 bg-zinc-900/50 overflow-hidden hover:border-[#007AFF]/30 transition-all duration-500 group"
+                className="rounded-2xl sm:rounded-3xl border border-white/5 overflow-hidden hover:border-[#007AFF]/30 transition-all duration-500 group"
               >
-                <div className="w-full h-auto">
-                  <img
-                    src={ss}
-                    alt={`Capture ${idx}`}
-                    className="w-full h-auto object-cover block group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
+                {/* 2. REPLACED <img> WITH THE HELPER COMPONENT */}
+                <ImageWithLoader
+                  src={ss}
+                  alt={`Capture ${idx}`}
+                  className="group-hover:scale-105 transition-transform duration-700"
+                />
               </div>
             ))}
           </div>
         </section>
-
-        {/* NEXT PROJECT */}
-        <section
-          onClick={() => navigate(`/project/${nextProject.id}`)}
-          className="group relative w-full py-12 sm:py-20 border-t border-zinc-800 cursor-pointer"
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 text-zinc-500 hover:text-white mb-10 sm:mb-16 group transition-colors uppercase text-[10px] sm:text-xs font-bold tracking-widest"
         >
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div>
-              <span className="font-mono text-zinc-500 text-[10px] sm:text-xs uppercase tracking-widest mb-2 block group-hover:text-[#007AFF] transition-colors">
-                Up Next
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-7xl font-black text-white uppercase tracking-tighter group-hover:translate-x-2 transition-transform duration-500">
-                {nextProject.name}
-              </h2>
-            </div>
-            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border border-zinc-700 flex items-center justify-center text-white group-hover:bg-[#007AFF] group-hover:border-[#007AFF] transition-all duration-300">
-              <ArrowRight
-                size={24}
-                className="sm:w-8 sm:h-8 -rotate-45 group-hover:rotate-0 transition-transform"
-              />
-            </div>
-          </div>
-        </section>
+          <ArrowLeft
+            size={16}
+            className="group-hover:-translate-x-1 transition-transform"
+          />
+          Back to Home
+        </button>
       </div>
     </div>
   );

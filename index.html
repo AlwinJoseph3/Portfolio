@@ -5,18 +5,105 @@
     <link rel="icon" type="image/png" href="/omlete.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - Alwin Joseph</title>
+
+    <style>
+      /* 1. Kill the white flash immediately */
+      html,
+      body {
+        background-color: #000000; /* Deep black to match your bg */
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        font-family: monospace; /* Fallback font */
+      }
+
+      /* 2. Center the loader */
+      #root {
+        height: 100%;
+        width: 100%;
+      }
+
+      .initial-loader {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #000000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+      }
+
+      /* 3. The "Breathing" Text Animation */
+      .loader-text {
+        color: #ffffff;
+        font-size: 14px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        animation: pulse 2s infinite ease-in-out;
+        opacity: 0.5;
+      }
+
+      /* 4. A subtle blue progress bar */
+      .loader-bar {
+        width: 100px;
+        height: 2px;
+        background: #111;
+        margin-top: 20px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+      }
+
+      .loader-bar::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0%;
+        background: #007aff; /* Your brand blue */
+        animation: load 3s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes load {
+        0% {
+          width: 0%;
+          left: 0;
+        }
+        50% {
+          width: 100%;
+          left: 0;
+        }
+        100% {
+          width: 0%;
+          left: 100%;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="initial-loader">
+        <div class="loader-text">Loading Components. Please wait</div>
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+
     <script type="module" src="/src/main.tsx"></script>
-    <!-- <script>
-      document.addEventListener("visibilitychange", function () {
-        if (document.hidden) {
-          document.title = "Come back! 😢";
-        } else {
-          document.title = "Alwin Joseph";
-        }
-      }); -->
-    </script>
   </body>
 </html>
