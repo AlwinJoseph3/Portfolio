@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { projectData } from "../data/projects";
 import { ArrowLeft, ExternalLink, Sparkles } from "lucide-react";
 import Starfield from "../components/StarBackground";
+import { motion } from "framer-motion";
 
 const ImageWithLoader = ({
   src,
@@ -12,7 +13,7 @@ const ImageWithLoader = ({
   src: string;
   alt: string;
   className?: string;
-}) => {
+  }) => {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -52,7 +53,13 @@ const ProjectDetail = () => {
     );
 
   return (
-    <div className="min-h-screen bg-[#020617] selection:bg-[#007AFF] selection:text-white overflow-x-hidden">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-[#020617] selection:bg-[#007AFF] selection:text-white overflow-x-hidden"
+    >
       <Starfield />
 
       <div
@@ -84,7 +91,7 @@ const ProjectDetail = () => {
               <a
                 href={project.link}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto justify-center group flex items-center gap-3 sm:gap-4 px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-black uppercase tracking-tighter rounded-full hover:bg-[#007AFF] hover:text-white transition-all shadow-xl hover:shadow-[#007AFF]/20 text-sm sm:text-base"
               >
                 Visit Site <ExternalLink size={16} className="sm:w-[18px]" />
@@ -225,7 +232,7 @@ const ProjectDetail = () => {
           Back to Home
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

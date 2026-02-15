@@ -17,7 +17,7 @@ export interface Project {
 
 export const projectData: Record<string, Project> = {
   "1": {
-    id: "1",
+    id: "motobuddy",
     category: "Mobile App",
     name: "MotoBuddy",
     description:
@@ -45,7 +45,7 @@ export const projectData: Record<string, Project> = {
     ],
   },
   "2": {
-    id: "2",
+    id: "smart health management system",
     category: "Mobile App",
     name: "Smart Health Management System",
     description:
@@ -69,7 +69,7 @@ export const projectData: Record<string, Project> = {
     ],
   },
   "3": {
-    id: "3",
+    id: "homechef",
     category: "Mobile App",
     name: "HomeChef",
     description:

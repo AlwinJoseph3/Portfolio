@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, TorusKnot } from "@react-three/drei";
+import { Float, TorusKnot } from "@react-three/drei";
 import * as THREE from "three";
 import { techCategories } from "../data/tech"; // Import your new data
+import FadeIn from "./FadeIn";
 
 // --- 3D Element: The "Logic Knot" ---
 const LogicKnot = () => {
@@ -16,16 +17,14 @@ const LogicKnot = () => {
   });
 
   return (
-    <Float speed={4} rotationIntensity={1.5} floatIntensity={2}>
-      <TorusKnot args={[1.2, 0.4, 200, 32, 2, 3]} ref={meshRef}>
-        <MeshDistortMaterial
+    <Float speed={2} rotationIntensity={1} floatIntensity={1}>
+      <TorusKnot args={[1.2, 0.4, 100, 16, 2, 3]} ref={meshRef}>
+        <meshPhongMaterial
           color="#007AFF"
-          speed={3}
-          distort={0.4}
-          radius={1}
           wireframe={true}
           opacity={0.5}
           transparent
+          shininess={100}
         />
       </TorusKnot>
     </Float>
@@ -37,42 +36,47 @@ const TechStack = () => {
     <section className="py-16 md:py-32 px-4 md:px-6 max-w-7xl mx-auto relative z-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
         <div className="space-y-12 md:space-y-16 order-2 lg:order-1">
-          <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 md:mb-10 text-center lg:text-left">
-            Tech Stack
-          </h3>
+          <FadeIn direction="right">
+            <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 md:mb-10 text-center lg:text-left">
+              Tech Stack
+            </h3>
+          </FadeIn>
 
-          <div className="space-y-10 md:space-y-12">
-            {techCategories.map((category) => (
-              <div key={category.id} className="group text-center lg:text-left">
-                <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block mb-4">
-                  {category.label}
-                </span>
+          <FadeIn delay={0.2} direction="right">
+            <div className="space-y-10 md:space-y-12">
+              {techCategories.map((category) => (
+                <div key={category.id} className="group text-center lg:text-left">
+                  <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block mb-4">
+                    {category.label}
+                  </span>
 
-                <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-4 md:gap-x-8">
-                  {category.skills.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className="flex items-center gap-3 group/item cursor-default"
-                    >
-                      <img
-                        src={skill.icon}
-                        alt={skill.name}
-                        className="w-5 h-5 md:w-6 md:h-6 opacity-70 group-hover/item:opacity-100 transition-opacity"
-                      />
-
-                      <span className="text-xl md:text-2xl font-bold text-white uppercase hover:text-[#007AFF] transition-colors">
-                        {skill.name}
-                      </span>
-                    </div>
-                  ))}
+                  <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-4 md:gap-x-8">
+                    {category.skills.map((skill) => (
+                      <div
+                        key={skill.name}
+                        className="flex items-center gap-3 group/item cursor-default relative"
+                      >
+                        <img
+                          src={skill.icon}
+                          alt={skill.name}
+                          className="w-5 h-5 md:w-6 md:h-6 opacity-70 group-hover/item:opacity-100 transition-opacity grayscale group-hover/item:grayscale-0"
+                        />
+                        
+                         <span className="text-xl md:text-2xl font-bold text-white uppercase group-hover/item:text-transparent group-hover/item:bg-clip-text group-hover/item:bg-gradient-to-r group-hover/item:from-[#007AFF] group-hover/item:to-purple-500 transition-all duration-300">
+                           {skill.name}
+                         </span>
+                         <span className="absolute -bottom-1 left-9 w-0 h-0.5 bg-[#007AFF] group-hover/item:w-[calc(100%-2.25rem)] transition-all duration-300" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </FadeIn>
         </div>
 
         <div className="h-[300px] md:h-[700px] relative pointer-events-none order-1 lg:order-2">
-          <Canvas camera={{ position: [0, 0, 5] }}>
+          <Canvas camera={{ position: [0, 0, 5] }} dpr={1} gl={{ antialias: false }}>
             <ambientLight intensity={1} />
             <pointLight position={[10, 10, 10]} intensity={2} />
             <LogicKnot />
