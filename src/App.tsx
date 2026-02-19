@@ -6,6 +6,11 @@ import NotFound from "./pages/NotFound";
 import Starfield from "./components/StarBackground";
 import { AnimatePresence } from "framer-motion";
 
+import MotoBuddy from "./pages/projects/MotoBuddy";
+import SHMS from "./pages/projects/Shms";
+import HomeChef from "./pages/projects/HomeChef";
+import Elis from "./pages/projects/Elis";
+
 const AnimatedRoutes = () => {
   const location = useLocation();
 
@@ -13,7 +18,16 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        
+        {/* Individual Project Routes */}
+        <Route path="/project/motobuddy" element={<MotoBuddy />} />
+        <Route path="/project/smart health management system" element={<SHMS />} />
+        <Route path="/project/homechef" element={<HomeChef />} />
+        <Route path="/project/elis" element={<Elis />} />
+        
+        {/* Fallback for other projects */}
         <Route path="/project/:id" element={<ProjectDetail />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

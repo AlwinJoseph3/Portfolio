@@ -5,14 +5,19 @@ export interface Project {
   description: string;
   link: string;
   story?: string;
-  mockupimage: string;
-  colortheme: string;
-  colors: string[];
+  techStack: string[];
+  // Frontend/Visual Fields (Optional)
+  mockupimage?: string;
+  colortheme?: string;
+  colors?: string[];
   fontname?: string;
   font?: string;
   fonttheme?: string;
-  techStack: string[];
-  screenshots: string[];
+  screenshots?: string[];
+  // Backend/System Fields (Optional)
+  features?: string[];
+  architecture?: string;
+  stats?: Record<string, string>;
 }
 
 export const projectData: Record<string, Project> = {
@@ -93,18 +98,37 @@ export const projectData: Record<string, Project> = {
       "/assets/HomeChef/plate.png",
     ],
   },
-  // "4": {
-  //   id: "4",
-  //   progress: "100%",
-  //   colors: ["#F15A24", "#FFFFFF", "#1E1E1E", "#141414"],
-  //   name: "Portfolio 3D",
-  //   description:
-  //     "An interactive 3D portfolio showcasing projects with immersive WebGL experiences and smooth animations.",
-  //   colortheme:
-  //     "Dark theme with dynamic 3D elements, focus on visual storytelling and seamless transitions between sections.",
-  //   techStack: ["React", "Three.js", "Blender", "TypeScript", "Tailwind"],
-  //   mockupimage: "/models/Phone.glb",
-  //   screenshots: ["/ss10.jpg", "/ss11.jpg", "/ss12.jpg"],
-  //   link: "https://alwinjoseph.dev",
-  // },
+  "4": {
+    id: "elis",
+    category: "AI Developer Tool",
+    name: "ELIS",
+    description:
+      "A Socratic AI Tutor that helps developers find logic gaps, not just code. It uses a diagnostic approach to guide you through 'stuck points'.",
+    link: "https://github.com/AlwinJoseph3/ELIS",
+    story:
+      "ELIS (Explain Like I'm Stuck) was born from the frustration that standard AI coding assistants often spoon-feed answers, hindering true learning. I wanted to create a tool that acts as a senior mentor, using the Socratic method to force developers to articulate their problems and find their own solutions. Built with a 'Cyber-Minimalist' aesthetic, it provides a distraction-free environment for deep debugging.",
+    techStack: ["React", "TypeScript", "Tailwind CSS", "Gemini API", "Vite"],
+    features: [
+      "Socratic Diagnostic Engine",
+      "Stuck Point Analysis",
+      "Metaphor Mode (Explain via analogies)",
+      "Local-First Privacy (BYOK)",
+      "Cyber-Minimalist UI",
+    ],
+    architecture: "Client-side React application integrating directly with Google Gemini API. Zero backend database; all state is persisted locally via browser storage.",
+    stats: {
+      "Privacy": "100% Local",
+      "Latency": "Real-time",
+    },
+    mockupimage: "/assets/ELIS/elis-mockup.png",
+    colortheme: "Deep Space Zinc & Cyan for focus.",
+    colors: ["#06b6d4", "#18181b", "#000000"],
+    fontname: "JetBrains Mono",
+    font: "'JetBrains Mono', monospace",
+    fonttheme: "Monospace typography for a raw, technical developer experience.",
+    screenshots: [
+        "/assets/ELIS/ss1.png",
+        "/assets/ELIS/ss2.png"
+    ]
+  },
 };

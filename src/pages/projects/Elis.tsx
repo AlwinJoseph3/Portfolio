@@ -1,51 +1,19 @@
-import { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { projectData } from "../data/projects";
-import { ArrowLeft, ExternalLink, Sparkles } from "lucide-react";
-import Starfield from "../components/StarBackground";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { projectData } from "../../data/projects";
+import { ArrowLeft, ExternalLink, Sparkles, Brain, Lock, Terminal } from "lucide-react";
+import Starfield from "../../components/StarBackground";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import ImageWithLoader from "../../components/ImageWithLoader";
 
-const ImageWithLoader = ({
-  src,
-  alt,
-  className,
-  priority = false,
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-  priority?: boolean;
-}) => {
-  const [loaded, setLoaded] = useState(false);
-
-  return (
-    <div
-      className={`relative w-full h-full bg-zinc-900 overflow-hidden ${
-        !loaded ? "animate-pulse" : ""
-      } ${className}`}
-    >
-      <img
-        src={src}
-        alt={alt}
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : "auto"}
-        onLoad={() => setLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-700 ${
-          loaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
-        }`}
-      />
-    </div>
-  );
-};
-
-const ProjectDetail = () => {
-  const { id } = useParams();
+const Elis = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const projects = Object.values(projectData);
-  const currentIndex = projects.findIndex((p) => p.id === id);
-  const project = projects[currentIndex];
+  // Directly grab ELIS data (ID: 4)
+  const project = projectData["4"];
+  // For navigation to next project (Loop back to MotoBuddy -> ID: 1)
+  const nextProject = projectData["1"];
 
   // Scroll Progress Logic
   const { scrollYProgress } = useScroll();
@@ -63,24 +31,11 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+  }, []);
 
-  if (!project)
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white gap-6">
-        <h1 className="text-4xl font-black uppercase tracking-tighter text-zinc-500">
-          404 • Project Not Found
-        </h1>
-        <button
-          onClick={() => navigate("/")}
-          className="px-8 py-3 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-[#007AFF] hover:text-white transition-all"
-        >
-          Back to Home
-        </button>
-      </div>
-    );
+  if (!project) return <div>Project Not Found</div>;
 
-  const primaryColor = project.colors?.[0] || "#007AFF";
+  const primaryColor = project.colors?.[0] || "#06b6d4";
 
   return (
     <motion.div
@@ -89,7 +44,7 @@ const ProjectDetail = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#020617] selection:bg-[#007AFF] selection:text-white overflow-x-hidden"
+      className="min-h-screen bg-[#020617] selection:bg-[#06b6d4] selection:text-white overflow-x-hidden"
     >
       {/* Scroll Progress Bar */}
       <motion.div
@@ -122,8 +77,9 @@ const ProjectDetail = () => {
               <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
               Back
             </button>
-            <span className="px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 text-[10px] sm:text-xs font-mono text-zinc-400 uppercase tracking-widest">
-              {project.category || "Web Experiment"}
+            <span className="px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 text-[10px] sm:text-xs font-mono text-zinc-400 uppercase tracking-widest flex items-center gap-2">
+              <Brain size={12} className="text-cyan-400" />
+              AI Developer Tool
             </span>
           </motion.div>
 
@@ -133,7 +89,7 @@ const ProjectDetail = () => {
               className="max-w-5xl mx-auto z-20 flex flex-col items-center"
             >
               <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[8rem] xl:text-[9rem] font-black tracking-tighter text-white uppercase leading-[0.85] mb-8 sm:mb-12">
-                {project.name}
+                ELIS
               </h1>
 
               <div className="max-w-2xl mx-auto">
@@ -146,9 +102,9 @@ const ProjectDetail = () => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-sm rounded-full hover:bg-[#007AFF] hover:text-white transition-all shadow-xl hover:shadow-[#007AFF]/20 hover:scale-105 active:scale-95"
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-sm rounded-full hover:bg-cyan-500 hover:text-white transition-all shadow-xl hover:shadow-cyan-500/20 hover:scale-105 active:scale-95"
                   >
-                    Visit Live Site <ExternalLink size={16} />
+                    View Source <ExternalLink size={16} />
                   </a>
                 )}
               </div>
@@ -164,15 +120,25 @@ const ProjectDetail = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="relative w-full max-w-7xl mx-auto mb-24 sm:mb-40"
         >
-            <div className="relative w-full aspect-video rounded-[1rem] sm:rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/50 backdrop-blur-sm">
+            <div className="relative w-full aspect-video rounded-[1rem] sm:rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl bg-zinc-900/50 backdrop-blur-sm group">
+                {/* Fallback visual if image fails or is placeholder */}
+                <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/80">
+                   <div className="text-center space-y-4">
+                        <Terminal size={64} className="mx-auto text-cyan-500 opacity-50" />
+                        <p className="text-zinc-500 font-mono text-sm">System Interface Visualization</p>
+                   </div>
+                </div>
+                
                 <ImageWithLoader
                     src={project.mockupimage}
                     alt="Hero Mockup"
                     priority={true}
-                    className="object-cover"
+                    className="object-cover relative z-10"
                 />
-                    {/* Glass Overlay Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                
+                {/* Cyber Overlay Effect */}
+                <div className="absolute inset-0 bg-gradient-to-t from-cyan-900/20 via-transparent to-transparent pointer-events-none mix-blend-overlay" />
+                <div className="absolute inset-0 border-[1px] border-cyan-500/10 rounded-[2rem] pointer-events-none" />
             </div>
         </motion.div>
         )}
@@ -182,9 +148,9 @@ const ProjectDetail = () => {
            {/* Backstory */}
            <div className="space-y-6">
              <h3 className="text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
-               <span className="w-8 h-[2px] bg-[#007AFF]" /> The Story
+               <span className="w-8 h-[2px] bg-[#06b6d4]" /> The Story
              </h3>
-             <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+             <p className="text-base sm:text-lg text-zinc-400 leading-relaxed font-sans">
                {project.story}
              </p>
            </div>
@@ -192,13 +158,13 @@ const ProjectDetail = () => {
            {/* Tech Stack */}
            <div className="space-y-6">
              <h3 className="text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
-               <span className="w-8 h-[2px] bg-[#007AFF]" /> Tech Stack
+               <span className="w-8 h-[2px] bg-[#06b6d4]" /> Tech Stack
              </h3>
              <div className="flex flex-wrap content-start gap-3">
                 {project.techStack?.map((tech, idx) => (
                   <div
                     key={idx}
-                    className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs sm:text-sm font-bold text-zinc-300 uppercase tracking-wide hover:border-[#007AFF] hover:bg-[#007AFF]/10 hover:text-white transition-all cursor-default"
+                    className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs sm:text-sm font-bold text-zinc-300 uppercase tracking-wide hover:border-[#06b6d4] hover:bg-[#06b6d4]/10 hover:text-white transition-all cursor-default font-mono"
                   >
                     {tech}
                   </div>
@@ -207,55 +173,61 @@ const ProjectDetail = () => {
            </div>
         </section>
 
-        {/* KEY FEATURES & ARCHITECTURE (New Section for Backend/Systems) */}
-        {(project.features || project.architecture || project.stats) && (
-            <section className="mb-24 sm:mb-40 grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-24">
-                {project.features && (
-                    <div>
-                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-6 flex items-center gap-3">
-                             <span className="w-8 h-[2px] bg-[#007AFF]" /> Key Features
-                        </h3>
-                        <ul className="space-y-4">
-                            {project.features.map((feature, idx) => (
-                                <li key={idx} className="flex items-start gap-3 text-zinc-400 leading-relaxed">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#007AFF] mt-2.5 flex-shrink-0" />
-                                    <span>{feature}</span>
-                                </li>
+        {/* KEY FEATURES & ARCHITECTURE */}
+        <section className="mb-24 sm:mb-40 grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-24">
+            {project.features && (
+                <div>
+                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-6 flex items-center gap-3">
+                            <span className="w-8 h-[2px] bg-[#06b6d4]" /> Key Features
+                    </h3>
+                    <ul className="space-y-4">
+                        {project.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-3 text-zinc-400 leading-relaxed group">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#06b6d4] mt-2.5 flex-shrink-0 group-hover:scale-150 transition-transform" />
+                                <span className="group-hover:text-cyan-200 transition-colors">{feature}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+            
+            {project.stats && (
+                <div>
+                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-6 flex items-center gap-3">
+                            <span className="w-8 h-[2px] bg-[#06b6d4]" /> Impact & Metrics
+                    </h3>
+                    <div className="grid grid-cols-2 gap-4">
+                            {Object.entries(project.stats).map(([key, value]) => (
+                                <div key={key} className="p-6 rounded-2xl bg-zinc-900/50 border border-white/5 flex flex-col items-center justify-center text-center group hover:border-[#06b6d4]/50 transition-colors">
+                                    <div className="mb-4 p-3 rounded-full bg-[#06b6d4]/10 text-[#06b6d4] group-hover:bg-[#06b6d4] group-hover:text-black transition-all">
+                                        {key === "Privacy" ? <Lock size={20} /> : <Terminal size={20} />}
+                                    </div>
+                                    <span className="text-2xl md:text-3xl font-black text-white mb-2">{value}</span>
+                                    <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">{key}</span>
+                                </div>
                             ))}
-                        </ul>
                     </div>
-                )}
-                
-                {project.stats && (
-                    <div>
-                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-6 flex items-center gap-3">
-                             <span className="w-8 h-[2px] bg-[#007AFF]" /> Impact & Metrics
-                        </h3>
-                        <div className="grid grid-cols-2 gap-4">
-                             {Object.entries(project.stats).map(([key, value]) => (
-                                 <div key={key} className="p-6 rounded-2xl bg-zinc-900 border border-white/5 flex flex-col items-center justify-center text-center">
-                                     <span className="text-3xl md:text-4xl font-black text-white mb-2">{value}</span>
-                                     <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">{key}</span>
-                                 </div>
-                             ))}
+                    {project.architecture && (
+                         <div className="mt-8 p-6 rounded-2xl bg-zinc-900/30 border border-white/5 text-sm text-zinc-400 leading-relaxed font-mono">
+                            <strong className="text-white block mb-2 uppercase text-xs tracking-widest">Architecture Note</strong>
+                            {project.architecture}
                         </div>
-                    </div>
-                )}
-            </section>
-        )}
+                    )}
+                </div>
+            )}
+        </section>
 
-
-        {/* IMPACT SECTION: COLORS & TYPOGRAPHY - Revamped (Conditional) */}
+        {/* COLORS & TYPOGRAPHY - Revamped */}
         {(project.colors && project.font && project.colortheme) && (
         <section className="mb-24 sm:mb-40">
            <div className="bg-zinc-900/40 border border-white/5 p-8 sm:p-12 rounded-[2.5rem] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 blur-[150px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#06b6d4]/10 blur-[150px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/2" />
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10">
                 {/* COLORS */}
                 <div>
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="p-2 bg-[#007AFF]/20 rounded-lg text-[#007AFF]">
+                    <div className="p-2 bg-[#06b6d4]/20 rounded-lg text-[#06b6d4]">
                         <Sparkles size={20} />
                     </div>
                     <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tighter">
@@ -270,7 +242,6 @@ const ProjectDetail = () => {
                         className="group flex flex-col gap-3 cursor-pointer"
                         onClick={() => {
                             navigator.clipboard.writeText(color);
-                            // Optional: Add toast notification here
                         }}
                       >
                         <div
@@ -285,14 +256,11 @@ const ProjectDetail = () => {
                             <span className="font-mono text-xs text-white font-bold uppercase">
                             {color}
                             </span>
-                            <span className="hidden sm:block text-[10px] text-zinc-600">
-                                HEX
-                            </span>
                         </div>
                       </div>
                     ))}
                   </div>
-                  <p className="mt-8 text-sm text-zinc-500 leading-relaxed border-l-2 border-zinc-800 pl-4">
+                  <p className="mt-8 text-sm text-zinc-500 leading-relaxed border-l-2 border-zinc-800 pl-4 font-mono">
                     {project.colortheme}
                   </p>
                 </div>
@@ -305,12 +273,12 @@ const ProjectDetail = () => {
                         </span>
                         <div className="bg-black/50 rounded-2xl p-6 border border-white/5 mb-6">
                             <p
-                                className="text-6xl sm:text-7xl md:text-8xl font-black text-white tracking-tight leading-none mb-4"
+                                className="text-5xl sm:text-6xl font-black text-white tracking-tight leading-none mb-4"
                                 style={{ fontFamily: project.font }}
                             >
-                                Aa
+                                console.log
                             </p>
-                            <p className="text-2xl text-zinc-400" style={{ fontFamily: project.font }}>
+                            <p className="text-xl text-zinc-400" style={{ fontFamily: project.font }}>
                                 {project.fontname}
                             </p>
                         </div>
@@ -318,7 +286,7 @@ const ProjectDetail = () => {
                    
                    <div>
                         <p className="text-lg text-white font-bold mb-2">Character</p>
-                        <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+                        <p className="text-sm sm:text-base text-zinc-400 leading-relaxed font-mono">
                             {project.fonttheme}
                         </p>
                    </div>
@@ -328,7 +296,7 @@ const ProjectDetail = () => {
         </section>
         )}
 
-        {/* SCREENSHOTS / VISUALS (Conditional) */}
+        {/* SCREENSHOTS / VISUALS */}
         {project.screenshots && project.screenshots.length > 0 && (
         <section className="space-y-12 mb-20 sm:mb-32">
           <div className="flex flex-col items-center text-center">
@@ -364,28 +332,26 @@ const ProjectDetail = () => {
         )}
 
         {/* BIG NEXT PROJECT CTA */}
+        {nextProject && (
         <section className="border-t border-zinc-800 pt-20 pb-10">
             <button
-              onClick={() => {
-                  const nextIndex = (currentIndex + 1) % projects.length;
-                  const nextProject = projects[nextIndex];
-                  navigate(`/project/${nextProject.id}`);
-              }} 
+              onClick={() => navigate(`/project/${nextProject.id}`)} 
               className="group w-full flex flex-col items-center justify-center gap-6 py-12 hover:bg-zinc-900/30 rounded-3xl transition-colors"
             >
                 <span className="text-zinc-500 uppercase tracking-widest text-xs font-bold">Up Next</span>
                 <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-white uppercase tracking-tighter group-hover:scale-105 transition-transform duration-500">
-                    {projects[(currentIndex + 1) % projects.length]?.name}
+                    {nextProject.name}
                 </h2>
-                <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center bg-black group-hover:bg-[#007AFF] group-hover:border-[#007AFF] transition-all">
+                <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center bg-black group-hover:bg-[#F15A24] group-hover:border-[#F15A24] transition-all">
                     <ArrowLeft size={24} className="text-white rotate-180 group-hover:translate-x-1 transition-transform" />
                 </div>
             </button>
         </section>
+        )}
 
       </div>
     </motion.div>
   );
 };
 
-export default ProjectDetail;
+export default Elis;

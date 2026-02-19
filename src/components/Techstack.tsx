@@ -59,10 +59,10 @@ const TechStack = () => {
                         <img
                           src={skill.icon}
                           alt={skill.name}
-                          className="w-5 h-5 md:w-6 md:h-6 opacity-70 group-hover/item:opacity-100 transition-opacity grayscale group-hover/item:grayscale-0"
+                          className="w-5 h-5 md:w-6 md:h-6"
                         />
                         
-                         <span className="text-xl md:text-2xl font-bold text-white uppercase group-hover/item:text-transparent group-hover/item:bg-clip-text group-hover/item:bg-gradient-to-r group-hover/item:from-[#007AFF] group-hover/item:to-purple-500 transition-all duration-300">
+                         <span className="text-xl md:text-2xl font-bold text-white uppercase group-hover/item:text-[#007AFF] transition-colors duration-300">
                            {skill.name}
                          </span>
                          <span className="absolute -bottom-1 left-9 w-0 h-0.5 bg-[#007AFF] group-hover/item:w-[calc(100%-2.25rem)] transition-all duration-300" />

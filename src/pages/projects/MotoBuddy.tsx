@@ -1,51 +1,19 @@
-import { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { projectData } from "../data/projects";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { projectData } from "../../data/projects";
 import { ArrowLeft, ExternalLink, Sparkles } from "lucide-react";
-import Starfield from "../components/StarBackground";
+import Starfield from "../../components/StarBackground";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import ImageWithLoader from "../../components/ImageWithLoader";
 
-const ImageWithLoader = ({
-  src,
-  alt,
-  className,
-  priority = false,
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-  priority?: boolean;
-}) => {
-  const [loaded, setLoaded] = useState(false);
-
-  return (
-    <div
-      className={`relative w-full h-full bg-zinc-900 overflow-hidden ${
-        !loaded ? "animate-pulse" : ""
-      } ${className}`}
-    >
-      <img
-        src={src}
-        alt={alt}
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : "auto"}
-        onLoad={() => setLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-700 ${
-          loaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
-        }`}
-      />
-    </div>
-  );
-};
-
-const ProjectDetail = () => {
-  const { id } = useParams();
+const MotoBuddy = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const projects = Object.values(projectData);
-  const currentIndex = projects.findIndex((p) => p.id === id);
-  const project = projects[currentIndex];
+  // Directly grab MotoBuddy data (ID: 1)
+  const project = projectData["1"];
+  // For navigation to next project (SHMS -> ID: 2)
+  const nextProject = projectData["2"];
 
   // Scroll Progress Logic
   const { scrollYProgress } = useScroll();
@@ -63,24 +31,11 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+  }, []);
 
-  if (!project)
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white gap-6">
-        <h1 className="text-4xl font-black uppercase tracking-tighter text-zinc-500">
-          404 • Project Not Found
-        </h1>
-        <button
-          onClick={() => navigate("/")}
-          className="px-8 py-3 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-[#007AFF] hover:text-white transition-all"
-        >
-          Back to Home
-        </button>
-      </div>
-    );
+  if (!project) return <div>Project Not Found</div>;
 
-  const primaryColor = project.colors?.[0] || "#007AFF";
+  const primaryColor = project.colors?.[0] || "#F15A24";
 
   return (
     <motion.div
@@ -89,7 +44,7 @@ const ProjectDetail = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-[#020617] selection:bg-[#007AFF] selection:text-white overflow-x-hidden"
+      className="min-h-screen bg-[#020617] selection:bg-[#F15A24] selection:text-white overflow-x-hidden"
     >
       {/* Scroll Progress Bar */}
       <motion.div
@@ -123,7 +78,7 @@ const ProjectDetail = () => {
               Back
             </button>
             <span className="px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 text-[10px] sm:text-xs font-mono text-zinc-400 uppercase tracking-widest">
-              {project.category || "Web Experiment"}
+              {project.category}
             </span>
           </motion.div>
 
@@ -146,7 +101,7 @@ const ProjectDetail = () => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-sm rounded-full hover:bg-[#007AFF] hover:text-white transition-all shadow-xl hover:shadow-[#007AFF]/20 hover:scale-105 active:scale-95"
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-sm rounded-full hover:bg-[#F15A24] hover:text-white transition-all shadow-xl hover:shadow-[#F15A24]/20 hover:scale-105 active:scale-95"
                   >
                     Visit Live Site <ExternalLink size={16} />
                   </a>
@@ -155,7 +110,7 @@ const ProjectDetail = () => {
           </motion.div>
         </section>
 
-        {/* MOCKUP (Conditional) */}
+        {/* MOCKUP */}
         {project.mockupimage && (
         <motion.div 
             style={{ y: y2 }}
@@ -182,7 +137,7 @@ const ProjectDetail = () => {
            {/* Backstory */}
            <div className="space-y-6">
              <h3 className="text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
-               <span className="w-8 h-[2px] bg-[#007AFF]" /> The Story
+               <span className="w-8 h-[2px] bg-[#F15A24]" /> The Story
              </h3>
              <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
                {project.story}
@@ -192,13 +147,13 @@ const ProjectDetail = () => {
            {/* Tech Stack */}
            <div className="space-y-6">
              <h3 className="text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
-               <span className="w-8 h-[2px] bg-[#007AFF]" /> Tech Stack
+               <span className="w-8 h-[2px] bg-[#F15A24]" /> Tech Stack
              </h3>
              <div className="flex flex-wrap content-start gap-3">
                 {project.techStack?.map((tech, idx) => (
                   <div
                     key={idx}
-                    className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs sm:text-sm font-bold text-zinc-300 uppercase tracking-wide hover:border-[#007AFF] hover:bg-[#007AFF]/10 hover:text-white transition-all cursor-default"
+                    className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs sm:text-sm font-bold text-zinc-300 uppercase tracking-wide hover:border-[#F15A24] hover:bg-[#F15A24]/10 hover:text-white transition-all cursor-default"
                   >
                     {tech}
                   </div>
@@ -207,45 +162,7 @@ const ProjectDetail = () => {
            </div>
         </section>
 
-        {/* KEY FEATURES & ARCHITECTURE (New Section for Backend/Systems) */}
-        {(project.features || project.architecture || project.stats) && (
-            <section className="mb-24 sm:mb-40 grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-24">
-                {project.features && (
-                    <div>
-                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-6 flex items-center gap-3">
-                             <span className="w-8 h-[2px] bg-[#007AFF]" /> Key Features
-                        </h3>
-                        <ul className="space-y-4">
-                            {project.features.map((feature, idx) => (
-                                <li key={idx} className="flex items-start gap-3 text-zinc-400 leading-relaxed">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#007AFF] mt-2.5 flex-shrink-0" />
-                                    <span>{feature}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-                
-                {project.stats && (
-                    <div>
-                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-6 flex items-center gap-3">
-                             <span className="w-8 h-[2px] bg-[#007AFF]" /> Impact & Metrics
-                        </h3>
-                        <div className="grid grid-cols-2 gap-4">
-                             {Object.entries(project.stats).map(([key, value]) => (
-                                 <div key={key} className="p-6 rounded-2xl bg-zinc-900 border border-white/5 flex flex-col items-center justify-center text-center">
-                                     <span className="text-3xl md:text-4xl font-black text-white mb-2">{value}</span>
-                                     <span className="text-xs font-mono text-zinc-500 uppercase tracking-widest">{key}</span>
-                                 </div>
-                             ))}
-                        </div>
-                    </div>
-                )}
-            </section>
-        )}
-
-
-        {/* IMPACT SECTION: COLORS & TYPOGRAPHY - Revamped (Conditional) */}
+        {/* COLORS & TYPOGRAPHY - Revamped */}
         {(project.colors && project.font && project.colortheme) && (
         <section className="mb-24 sm:mb-40">
            <div className="bg-zinc-900/40 border border-white/5 p-8 sm:p-12 rounded-[2.5rem] relative overflow-hidden">
@@ -255,7 +172,7 @@ const ProjectDetail = () => {
                 {/* COLORS */}
                 <div>
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="p-2 bg-[#007AFF]/20 rounded-lg text-[#007AFF]">
+                    <div className="p-2 bg-[#F15A24]/20 rounded-lg text-[#F15A24]">
                         <Sparkles size={20} />
                     </div>
                     <h3 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tighter">
@@ -270,7 +187,6 @@ const ProjectDetail = () => {
                         className="group flex flex-col gap-3 cursor-pointer"
                         onClick={() => {
                             navigator.clipboard.writeText(color);
-                            // Optional: Add toast notification here
                         }}
                       >
                         <div
@@ -328,7 +244,7 @@ const ProjectDetail = () => {
         </section>
         )}
 
-        {/* SCREENSHOTS / VISUALS (Conditional) */}
+        {/* SCREENSHOTS / VISUALS */}
         {project.screenshots && project.screenshots.length > 0 && (
         <section className="space-y-12 mb-20 sm:mb-32">
           <div className="flex flex-col items-center text-center">
@@ -364,28 +280,26 @@ const ProjectDetail = () => {
         )}
 
         {/* BIG NEXT PROJECT CTA */}
+        {nextProject && (
         <section className="border-t border-zinc-800 pt-20 pb-10">
             <button
-              onClick={() => {
-                  const nextIndex = (currentIndex + 1) % projects.length;
-                  const nextProject = projects[nextIndex];
-                  navigate(`/project/${nextProject.id}`);
-              }} 
+              onClick={() => navigate(`/project/${nextProject.id}`)} 
               className="group w-full flex flex-col items-center justify-center gap-6 py-12 hover:bg-zinc-900/30 rounded-3xl transition-colors"
             >
                 <span className="text-zinc-500 uppercase tracking-widest text-xs font-bold">Up Next</span>
                 <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-white uppercase tracking-tighter group-hover:scale-105 transition-transform duration-500">
-                    {projects[(currentIndex + 1) % projects.length]?.name}
+                    {nextProject.name}
                 </h2>
-                <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center bg-black group-hover:bg-[#007AFF] group-hover:border-[#007AFF] transition-all">
+                <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center bg-black group-hover:bg-[#F15A24] group-hover:border-[#F15A24] transition-all">
                     <ArrowLeft size={24} className="text-white rotate-180 group-hover:translate-x-1 transition-transform" />
                 </div>
             </button>
         </section>
+        )}
 
       </div>
     </motion.div>
   );
 };
 
-export default ProjectDetail;
+export default MotoBuddy;
