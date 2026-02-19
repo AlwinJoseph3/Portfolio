@@ -20,19 +20,19 @@ const Preloader = () => {
           className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
         >
           <div className="flex flex-col items-center">
-             <motion.div
-               animate={{ rotate: 360 }}
-               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-               className="w-16 h-16 border-t-2 border-[#007AFF] rounded-full mb-4"
-             />
-             <motion.h1
-               initial={{ opacity: 0, y: 10 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ delay: 0.2 }}
-               className="text-white font-black tracking-widest uppercase text-sm"
-             >
-               Loading Experience
-             </motion.h1>
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="w-16 h-16 border-t-2 border-[#007AFF] rounded-full mb-4"
+            />
+            <motion.h1
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-white font-black tracking-widest uppercase text-sm"
+            >
+              Loading Experience
+            </motion.h1>
           </div>
         </motion.div>
       )}

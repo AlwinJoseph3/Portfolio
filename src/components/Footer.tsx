@@ -19,7 +19,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-20 relative z-10">
           <div className="space-y-4">
-            <h4 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">
+            <h4 className="text-3xl sm:text-4xl md:text-6xl font-black font-display text-white uppercase tracking-tighter">
               Alwin Joseph
             </h4>
             <div className="flex items-center gap-3 text-zinc-500">
@@ -66,9 +66,17 @@ const Footer = () => {
           <p className="text-[10px] text-zinc-600 uppercase tracking-[0.2em]">
             © {currentYear} Portfolio
           </p>
-          <p className="text-[10px] text-zinc-600 uppercase tracking-[0.2em]">
-            Crafted with love ❤️
-          </p>
+          <div className="flex flex-col items-end gap-2">
+            <p className="text-[10px] text-zinc-600 uppercase tracking-[0.2em]">
+              Crafted with love ❤️
+            </p>
+            <p
+              className="text-[10px] text-zinc-800 hover:text-zinc-600 transition-colors uppercase tracking-[0.2em] cursor-help"
+              title="Just start typing..."
+            >
+              Psst... try typing my first name
+            </p>
+          </div>
         </div>
       </div>
       <div

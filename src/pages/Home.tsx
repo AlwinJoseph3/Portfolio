@@ -44,7 +44,7 @@ const Home = ({}) => {
   };
 
   return (
-    <motion.main 
+    <motion.main
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -60,29 +60,37 @@ const Home = ({}) => {
         </div>
 
         <div className="relative z-10 text-center px-4 sm:px-6 md:px-8 max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl mx-auto">
-          <motion.div 
-             className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black tracking-tighter text-white dark:text-white uppercase transition-colors leading-[0.9] mb-6 overflow-hidden"
-             variants={letterContainerDetails}
-             initial="hidden"
-             animate="visible"
+          <motion.div
+            className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black font-display tracking-tighter text-white uppercase transition-colors leading-[0.8] sm:leading-[0.9] mb-6 overflow-hidden"
+            variants={letterContainerDetails}
+            initial="hidden"
+            animate="visible"
           >
-             <div className="flex flex-wrap justify-center mb-0 sm:mb-2">
+            <div className="flex flex-wrap justify-center mb-0 sm:mb-2">
               {profileData.firstName.split("").map((char, index) => (
-                <motion.span key={index} variants={letterDetails} className="inline-block">
+                <motion.span
+                  key={index}
+                  variants={letterDetails}
+                  className="inline-block"
+                >
                   {char}
                 </motion.span>
               ))}
-             </div>
-             <div className="flex justify-center">
+            </div>
+            <div className="flex justify-center">
               {profileData.lastName.split("").map((char, index) => (
-                <motion.span key={index} variants={letterDetails} className="inline-block">
+                <motion.span
+                  key={index}
+                  variants={letterDetails}
+                  className="inline-block"
+                >
                   {char}
                 </motion.span>
               ))}
-             </div>
+            </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
@@ -101,12 +109,11 @@ const Home = ({}) => {
             onClick={() => setIsResumeOpen(true)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="mt-8 sm:mt-10 px-6 sm:px-8 py-3 sm:py-4 bg-[#007AFF] text-white font-black rounded-full uppercase tracking-widest text-[10px] sm:text-xs flex items-center gap-2 sm:gap-3 mx-auto shadow-[0_0_20px_rgba(0,122,255,0.3)] hover:shadow-[0_0_40px_rgba(0,122,255,0.6)] transition-all duration-300 ring-1 ring-white/20 hover:ring-white/50"
+            className="mt-6 sm:mt-10 px-5 sm:px-8 py-3 sm:py-4 bg-[#007AFF] text-white font-black font-display rounded-full uppercase tracking-widest text-[9px] sm:text-xs flex items-center gap-2 sm:gap-3 mx-auto shadow-[0_0_20px_rgba(0,122,255,0.3)] hover:shadow-[0_0_40px_rgba(0,122,255,0.6)] transition-all duration-300 ring-1 ring-white/20 hover:ring-white/50"
           >
-            <FileText size={16} /> 
+            <FileText size={16} />
             <span>View Resume</span>
           </motion.button>
-          
         </div>
       </section>
 
@@ -123,7 +130,7 @@ const Home = ({}) => {
         <div className="flex flex-col lg:flex-row justify-between items-end mb-8 sm:mb-12 gap-6 sm:gap-8">
           <div className="max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
             <FadeIn direction="up">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display text-white uppercase tracking-tighter mb-4">
                 Projects
               </h2>
             </FadeIn>
@@ -137,70 +144,82 @@ const Home = ({}) => {
           </div>
         </div>
 
-        <FadeIn delay={0.4} direction="up" fullWidth>
-          <div className="flex flex-col gap-8">
-            {projects.map((project, index) => (
+        <div className="flex flex-col gap-8">
+          {projects.map((project, index) => (
+            <FadeIn
+              key={project.id}
+              delay={0.2 + index * 0.1}
+              direction="up"
+              fullWidth
+            >
               <SpotlightCard
-                key={project.id}
                 onClick={() => navigate(`/project/${project.id}`)}
                 spotlightColor="rgba(0, 122, 255, 0.1)"
                 className="group relative w-full bg-zinc-900/10 rounded-3xl border border-white/5 overflow-hidden transition-all hover:border-white/10 cursor-pointer"
               >
                 <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative z-10 p-6 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12">
-                   {/* Left Side: Number & Info */}
-                   <div className="flex items-start gap-6 md:gap-10 max-w-3xl">
-                      <span className="hidden md:block text-5xl font-black text-white/5 font-mono select-none group-hover:text-white/10 transition-colors">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      
-                      <div className="space-y-4">
-                        <div className="flex flex-wrap gap-2 md:hidden">
-                            {project.techStack.slice(0, 3).map((tech) => (
-                                <span key={tech} className="text-[10px] font-mono text-[#007AFF] uppercase tracking-wider">{tech}</span>
-                            ))}
-                        </div>
 
-                        <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9] group-hover:text-[#007AFF] transition-colors">
-                          {project.name}
-                        </h3>
-                        
-                        <p className="text-sm md:text-base text-zinc-400 line-clamp-2 md:line-clamp-none max-w-xl leading-relaxed group-hover:text-zinc-300 transition-colors">
-                          {project.description}
-                        </p>
-                      </div>
-                   </div>
+                <div className="relative z-10 p-5 sm:p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8 md:gap-12">
+                  {/* Left Side: Number & Info */}
+                  <div className="flex items-start gap-6 md:gap-10 max-w-3xl">
+                    <span className="hidden md:block text-5xl font-black font-display text-white/5 font-mono select-none group-hover:text-white/10 transition-colors">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
 
-                   {/* Right Side: Tech & Action */}
-                   <div className="flex flex-row md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-4">
-                      <div className="hidden md:flex flex-wrap justify-end gap-2 max-w-[200px]">
-                        {project.techStack.map((tech) => (
+                    <div className="space-y-4">
+                      <div className="flex flex-wrap gap-2 md:hidden">
+                        {project.techStack.slice(0, 3).map((tech) => (
                           <span
                             key={tech}
-                            className="text-[10px] font-bold font-mono text-zinc-500 bg-zinc-900/50 border border-zinc-800 px-2 py-1 rounded-full uppercase tracking-wider group-hover:border-zinc-700 transition-colors"
+                            className="text-[10px] font-mono text-[#007AFF] uppercase tracking-wider"
                           >
                             {tech}
                           </span>
                         ))}
                       </div>
 
-                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center text-white group-hover:bg-[#007AFF] group-hover:border-[#007AFF] group-hover:scale-110 transition-all duration-300">
-                        <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:-rotate-45 transition-transform duration-300" />
-                      </div>
-                   </div>
+                      <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display text-white tracking-tighter uppercase leading-[0.95] sm:leading-[0.9] group-hover:text-[#007AFF] transition-colors">
+                        {project.name}
+                      </h3>
+
+                      <p className="text-sm md:text-base text-zinc-400 line-clamp-2 md:line-clamp-none max-w-xl leading-relaxed group-hover:text-zinc-300 transition-colors">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Right Side: Tech & Action */}
+                  <div className="flex flex-row md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-4">
+                    <div className="hidden md:flex flex-wrap justify-end gap-2 max-w-[200px]">
+                      {project.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="text-[10px] font-bold font-mono text-zinc-500 bg-zinc-900/50 border border-zinc-800 px-2 py-1 rounded-full uppercase tracking-wider group-hover:border-zinc-700 transition-colors"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/10 flex items-center justify-center text-white group-hover:bg-[#007AFF] group-hover:border-[#007AFF] group-hover:scale-110 transition-all duration-300">
+                      <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:-rotate-45 transition-transform duration-300" />
+                    </div>
+                  </div>
                 </div>
               </SpotlightCard>
-            ))}
-          </div>
-        </FadeIn>
+            </FadeIn>
+          ))}
+        </div>
       </section>
 
       <section id="contact">
         <Footer />
       </section>
 
-      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
+      <ResumeModal
+        isOpen={isResumeOpen}
+        onClose={() => setIsResumeOpen(false)}
+      />
     </motion.main>
   );
 };

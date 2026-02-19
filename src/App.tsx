@@ -1,9 +1,16 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import Starfield from "./components/StarBackground";
+import CursorTrail from "./components/CursorTrail";
+import SignalGlitch from "./components/SignalGlitch";
 import { AnimatePresence } from "framer-motion";
 
 import MotoBuddy from "./pages/projects/MotoBuddy";
@@ -18,16 +25,19 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
-        
+
         {/* Individual Project Routes */}
         <Route path="/project/motobuddy" element={<MotoBuddy />} />
-        <Route path="/project/smart health management system" element={<SHMS />} />
+        <Route
+          path="/project/smart health management system"
+          element={<SHMS />}
+        />
         <Route path="/project/homechef" element={<HomeChef />} />
         <Route path="/project/elis" element={<Elis />} />
-        
+
         {/* Fallback for other projects */}
         <Route path="/project/:id" element={<ProjectDetail />} />
-        
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
@@ -39,6 +49,8 @@ const App = () => {
     <Router>
       {/* <Loader /> */}
       <Starfield />
+      <CursorTrail />
+      <SignalGlitch />
       {/* <Preloader /> */}
 
       <div className="relative z-10">

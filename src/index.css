@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,10 +8,67 @@ html {
 }
 
 body {
-  @apply bg-black;
+  @apply bg-black text-white antialiased font-sans;
   margin: 0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+@keyframes shooting {
+  0% {
+    transform: translateX(0) translateY(0) rotate(45deg);
+  }
+  100% {
+    transform: translateX(300px) translateY(300px) rotate(45deg);
+  }
+}
+
+@keyframes tail {
+  0% {
+    width: 0;
+  }
+  30% {
+    width: 100px;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes shining {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 30px;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+.shooting-star {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(-45deg, #5f91ff, rgba(0, 0, 255, 0));
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px #699bff);
+  animation:
+    tail 3000ms ease-in-out infinite,
+    shooting 3000ms ease-in-out infinite;
+}
+
+.shooting-star::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  height: 4px; /* Slightly larger head */
+  width: 4px;
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 0 5px #5f91ff;
+  /* Removed animation shining to keep it simple, or re-add if needed but without cross effect */
 }
 
 @keyframes marquee {
@@ -57,4 +113,132 @@ body {
 
   background-size: 550px 550px;
   background-repeat: repeat;
+}
+
+@keyframes galaxy-float {
+  0% {
+    transform: translateY(0px) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.02);
+    filter: hue-rotate(15deg);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
+
+.stars-galaxy {
+  background-image: 
+    /* Galaxy/Cosmic Palette: Purple, Pink, Indigo, Cyan, White */
+    radial-gradient(2px 2px at 20px 30px, #c084fc, rgba(0, 0, 0, 0)),
+    /* Purple */
+    radial-gradient(2px 2px at 100px 50px, #e879f9, rgba(0, 0, 0, 0)),
+    /* Pink */
+    radial-gradient(2px 2px at 200px 150px, #818cf8, rgba(0, 0, 0, 0)),
+    /* Indigo */
+    radial-gradient(3px 3px at 300px 250px, #22d3ee, rgba(0, 0, 0, 0)),
+    /* Cyan Glow */
+    radial-gradient(2px 2px at 450px 100px, #a855f7, rgba(0, 0, 0, 0)),
+    /* Purple */
+    radial-gradient(1.5px 1.5px at 70px 180px, #ffffff, rgba(0, 0, 0, 0)),
+    /* White */
+    radial-gradient(2px 2px at 280px 40px, #38bdf8, rgba(0, 0, 0, 0)),
+    /* Sky Blue */
+    radial-gradient(4px 4px at 350px 350px, #d946ef, rgba(0, 0, 0, 0)),
+    /* Magenta Glow */
+    radial-gradient(1px 1px at 400px 400px, #ffffff, rgba(0, 0, 0, 0)); /* White */
+
+  background-size: 550px 550px;
+  background-repeat: repeat;
+  animation: galaxy-float 8s ease-in-out infinite;
+  opacity: 1;
+}
+/* --- Signal Glitch Effect --- */
+.glitch-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  background: rgba(0, 122, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+.glitch-active .glitch-overlay {
+  opacity: 1;
+  animation: glitch-anim 0.2s infinite;
+}
+
+@keyframes glitch-anim {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-5px, 5px) skewX(5deg);
+  }
+  40% {
+    transform: translate(5px, -5px) skewX(-5deg);
+  }
+  60% {
+    transform: translate(-5px, -2px);
+  }
+  80% {
+    transform: translate(5px, 2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.chromatic-aberration {
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  display: none;
+}
+
+.glitch-active .chromatic-aberration {
+  display: block;
+}
+
+.chromatic-aberration::before,
+.chromatic-aberration::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  mix-blend-mode: screen;
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.glitch-active .scanlines {
+  opacity: 1;
+}
+
+.rgb-split {
+  filter: url(#rgb-split-filter);
+}
+
+/* SVG Filter for Chromatic Aberration */
+#rgb-split-filter {
+  display: none;
 }

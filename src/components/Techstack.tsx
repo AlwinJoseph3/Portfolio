@@ -37,15 +37,19 @@ const TechStack = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
         <div className="space-y-12 md:space-y-16 order-2 lg:order-1">
           <FadeIn direction="right">
-            <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-8 md:mb-10 text-center lg:text-left">
+            <h3 className="text-4xl md:text-5xl font-black font-display text-white uppercase tracking-tighter mb-8 md:mb-10 text-center lg:text-left">
               Tech Stack
             </h3>
           </FadeIn>
 
-          <FadeIn delay={0.2} direction="right">
-            <div className="space-y-10 md:space-y-12">
-              {techCategories.map((category) => (
-                <div key={category.id} className="group text-center lg:text-left">
+          <div className="space-y-10 md:space-y-12">
+            {techCategories.map((category, index) => (
+              <FadeIn
+                key={category.id}
+                delay={0.2 + index * 0.1}
+                direction="right"
+              >
+                <div className="group text-center lg:text-left">
                   <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block mb-4">
                     {category.label}
                   </span>
@@ -61,22 +65,26 @@ const TechStack = () => {
                           alt={skill.name}
                           className="w-5 h-5 md:w-6 md:h-6"
                         />
-                        
-                         <span className="text-xl md:text-2xl font-bold text-white uppercase group-hover/item:text-[#007AFF] transition-colors duration-300">
-                           {skill.name}
-                         </span>
-                         <span className="absolute -bottom-1 left-9 w-0 h-0.5 bg-[#007AFF] group-hover/item:w-[calc(100%-2.25rem)] transition-all duration-300" />
+
+                        <span className="text-xl md:text-2xl font-bold font-display text-white uppercase group-hover/item:text-[#007AFF] transition-colors duration-300">
+                          {skill.name}
+                        </span>
+                        <span className="absolute -bottom-1 left-9 w-0 h-0.5 bg-[#007AFF] group-hover/item:w-[calc(100%-2.25rem)] transition-all duration-300" />
                       </div>
                     ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          </FadeIn>
+              </FadeIn>
+            ))}
+          </div>
         </div>
 
         <div className="h-[300px] md:h-[700px] relative pointer-events-none order-1 lg:order-2">
-          <Canvas camera={{ position: [0, 0, 5] }} dpr={1} gl={{ antialias: false }}>
+          <Canvas
+            camera={{ position: [0, 0, 5] }}
+            dpr={1}
+            gl={{ antialias: false }}
+          >
             <ambientLight intensity={1} />
             <pointLight position={[10, 10, 10]} intensity={2} />
             <LogicKnot />
