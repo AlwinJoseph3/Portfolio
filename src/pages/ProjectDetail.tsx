@@ -151,7 +151,7 @@ const ProjectDetail = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-sm rounded-full hover:bg-[#007AFF] hover:text-white transition-all shadow-xl hover:shadow-[#007AFF]/20 hover:scale-105 active:scale-95"
                 >
-                  Visit Live Site <ExternalLink size={16} />
+                  Show me <ExternalLink size={16} />
                 </a>
               )}
             </div>

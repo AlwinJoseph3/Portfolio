@@ -31,12 +31,19 @@ const TechHalo = () => {
 
 const AboutMe = () => {
   return (
-    <section id="about" className="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto relative z-10">
+    <section
+      id="about"
+      className="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto relative z-10"
+    >
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         <div className="md:col-span-5 relative h-[300px] md:h-[500px] flex items-center justify-center group w-full">
           <FadeIn delay={0.2} className="w-full h-full">
             <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
-              <Canvas camera={{ position: [0, 0, 5] }} dpr={1} gl={{ antialias: false }}>
+              <Canvas
+                camera={{ position: [0, 0, 5] }}
+                dpr={1}
+                gl={{ antialias: false }}
+              >
                 <ambientLight intensity={0.5} />
                 <pointLight position={[10, 10, 10]} intensity={1.5} />
                 <TechHalo />
@@ -63,8 +70,8 @@ const AboutMe = () => {
                   interfaces that blend aesthetics with functionality.
                 </p>
                 <p>
-                  Currently based in Kochi, I am always learning and exploring new
-                  technologies to stay at the forefront of web development.
+                  Currently based in Kochi, I am always learning and exploring
+                  new technologies to stay at the forefront of web development.
                 </p>
                 <p>
                   Apart from coding, I enjoy designing and dabbling in 3D

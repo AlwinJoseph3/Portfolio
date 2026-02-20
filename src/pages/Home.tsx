@@ -115,6 +115,32 @@ const Home = ({}) => {
             <span>View Resume</span>
           </motion.button>
         </div>
+
+        {/* MINIMALIST GALAXY SCROLL SUGGESTION */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-8 sm:bottom-12 left-1/2 flex flex-col items-center gap-4 z-20 pointer-events-none"
+          style={{ x: "-50%" }}
+        >
+          <div className="relative flex items-center justify-center">
+            {/* Subtle Orbit */}
+            <div className="absolute w-10 h-10 rounded-full border-[0.5px] border-white/5 border-t-white/30 animate-[spin_4s_linear_infinite]" />
+
+            {/* Minimalist Capsule */}
+            <div className="w-[18px] h-7 sm:w-5 sm:h-8 border-[0.5px] border-white/20 rounded-full flex justify-center py-1.5 bg-black/20 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+              <motion.div
+                animate={{ y: [0, 12], opacity: [0.8, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "circIn" }}
+                className="w-0.5 h-1 sm:h-1.5 bg-white drop-shadow-[0_0_2px_rgba(255,255,255,0.8)] rounded-full"
+              />
+            </div>
+          </div>
+          <span className="text-white/30 text-[8px] sm:text-[9px] uppercase tracking-[0.5em] font-mono text-center ml-[0.5em]">
+            Scroll Down
+          </span>
+        </motion.div>
       </section>
 
       <About />

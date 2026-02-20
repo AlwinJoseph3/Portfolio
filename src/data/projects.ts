@@ -6,7 +6,6 @@ export interface Project {
   link: string;
   story?: string;
   techStack: string[];
-  // Frontend/Visual Fields (Optional)
   mockupimage?: string;
   colortheme?: string;
   colors?: string[];
@@ -14,7 +13,6 @@ export interface Project {
   font?: string;
   fonttheme?: string;
   screenshots?: string[];
-  // Backend/System Fields (Optional)
   features?: string[];
   architecture?: string;
   stats?: Record<string, string>;
@@ -112,23 +110,21 @@ export const projectData: Record<string, Project> = {
       "Socratic Diagnostic Engine",
       "Stuck Point Analysis",
       "Metaphor Mode (Explain via analogies)",
-      "Local-First Privacy (BYOK)",
-      "Cyber-Minimalist UI",
+      "Local-First Privacy ",
     ],
-    architecture: "Client-side React application integrating directly with Google Gemini API. Zero backend database; all state is persisted locally via browser storage.",
+    architecture:
+      "Client-side React application integrating directly with Google Gemini API. Zero backend database; all state is persisted locally via browser storage.",
     stats: {
-      "Privacy": "100% Local",
-      "Latency": "Real-time",
+      Privacy: "100% Local",
+      Latency: "Real-time",
     },
     mockupimage: "/assets/ELIS/elis-mockup.png",
     colortheme: "Deep Space Zinc & Cyan for focus.",
     colors: ["#06b6d4", "#18181b", "#000000"],
     fontname: "JetBrains Mono",
     font: "'JetBrains Mono', monospace",
-    fonttheme: "Monospace typography for a raw, technical developer experience.",
-    screenshots: [
-        "/assets/ELIS/ss1.png",
-        "/assets/ELIS/ss2.png"
-    ]
+    fonttheme:
+      "Monospace typography for a raw, technical developer experience.",
+    screenshots: ["/assets/ELIS/ss1.png", "/assets/ELIS/ss2.png"],
   },
 };

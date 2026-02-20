@@ -14,7 +14,7 @@ const NotFound = () => {
       className="min-h-screen bg-black flex flex-col items-center justify-center p-4 text-center overflow-hidden relative selection:bg-[#007AFF] selection:text-white"
     >
       <Starfield />
-      
+
       {/* Background Glow */}
       <div className="absolute w-[500px] h-[500px] bg-[#007AFF] rounded-full blur-[150px] opacity-10 pointer-events-none" />
 
@@ -27,7 +27,8 @@ const NotFound = () => {
           Lost in Space?
         </h2>
         <p className="text-zinc-400 text-lg leading-relaxed">
-          The page you are looking for doesn't exist or has been moved to another dimension.
+          The page you are looking for doesn't exist or has been moved to
+          another dimension.
         </p>
 
         <button
