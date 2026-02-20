@@ -42,7 +42,7 @@ const Navbar = () => {
             className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 hover:scale-110 transition-transform"
           >
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="Logo"
               className="w-full h-full object-contain brightness-0 invert"
             />

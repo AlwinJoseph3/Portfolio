@@ -68,7 +68,6 @@ body {
   background: #fff;
   border-radius: 100%;
   box-shadow: 0 0 5px #5f91ff;
-  /* Removed animation shining to keep it simple, or re-add if needed but without cross effect */
 }
 
 @keyframes marquee {

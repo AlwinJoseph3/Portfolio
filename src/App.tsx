@@ -4,21 +4,23 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
+
+const Home = lazy(() => import("./pages/Home"));
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-import Starfield from "./components/StarBackground";
-import CursorTrail from "./components/CursorTrail";
-import SignalGlitch from "./components/SignalGlitch";
+
+const Starfield = lazy(() => import("./components/StarBackground"));
+const CursorTrail = lazy(() => import("./components/CursorTrail"));
+const SignalGlitch = lazy(() => import("./components/SignalGlitch"));
+
 import { AnimatePresence } from "framer-motion";
 
 const MotoBuddy = lazy(() => import("./pages/projects/MotoBuddy"));
 const SHMS = lazy(() => import("./pages/projects/Shms"));
 const HomeChef = lazy(() => import("./pages/projects/HomeChef"));
 const Elis = lazy(() => import("./pages/projects/Elis"));
-// const [isMounted, setIsMounted] = useState(false);
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -28,7 +30,6 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
 
-        {/* Individual Project Routes */}
         <Route path="/project/motobuddy" element={<MotoBuddy />} />
         <Route
           path="/project/smart health management system"
@@ -37,7 +38,6 @@ const AnimatedRoutes = () => {
         <Route path="/project/homechef" element={<HomeChef />} />
         <Route path="/project/elis" element={<Elis />} />
 
-        {/* Fallback for other projects */}
         <Route path="/project/:id" element={<ProjectDetail />} />
 
         <Route path="*" element={<NotFound />} />
@@ -47,20 +47,32 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => {
+  const [showEffects, setShowEffects] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowEffects(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Router>
-      {/* <Loader /> */}
-      <Starfield />
-      <CursorTrail />
-      <SignalGlitch />
-      {/* <Preloader /> */}
+      <Suspense fallback={<div className="h-screen w-full bg-black" />}>
+        <Starfield />
 
-      <div className="relative z-10">
-        <Navbar />
-        <Suspense fallback={<div className="h-[100vh] w-[100vw] bg-black" />}>
+        {showEffects && (
+          <>
+            <CursorTrail />
+            <SignalGlitch />
+          </>
+        )}
+
+        <div className="relative z-10">
+          <Navbar />
           <AnimatedRoutes />
-        </Suspense>
-      </div>
+        </div>
+      </Suspense>
     </Router>
   );
 };

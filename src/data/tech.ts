@@ -23,7 +23,6 @@ export const techCategories: TechCategory[] = [
         name: "Three.js",
         icon: "/icons/threedotjs_white.svg",
       },
-      // { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/white" },
     ],
   },
   {
@@ -38,7 +37,7 @@ export const techCategories: TechCategory[] = [
         icon: "/icons/typescript.svg",
       },
       { name: "HTML5", icon: "/icons/html5.svg" },
-      { name: "CSS3", icon: "/css3.png" },
+      { name: "CSS3", icon: "icons/css3.svg" },
     ],
   },
   {
@@ -46,7 +45,6 @@ export const techCategories: TechCategory[] = [
     label: "Backend & Infrastructure",
     skills: [
       { name: "Node.js", icon: "/icons/nodedotjs.svg" },
-      // { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
       { name: "Firebase", icon: "/icons/firebase.svg" },
       { name: "Netlify", icon: "/icons/netlify.svg" },
     ],
@@ -81,11 +79,11 @@ export const techCategories: TechCategory[] = [
       { name: "Blender", icon: "/icons/blender.svg" },
       {
         name: "Illustrator",
-        icon: "/ill.png",
+        icon: "icons/ill.svg",
       },
       {
         name: "Photoshop",
-        icon: "/ps.png",
+        icon: "icons/ps.svg",
       },
     ],
   },

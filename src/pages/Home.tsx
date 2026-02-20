@@ -1,4 +1,4 @@
-// src/pages/Home.tsx - Full code with CLS fix
+// src/pages/Home.tsx - Fully Optimized for LCP, CLS, and Composited Animations
 import { useState, Suspense, lazy } from "react";
 const HeroCanvas = lazy(() => import("../components/HeroCanvas"));
 import { useNavigate } from "react-router-dom";
@@ -25,8 +25,8 @@ const Home = ({}) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.2,
+        staggerChildren: 0.03, // OPTIMIZED: Faster stagger for better LCP
+        delayChildren: 0.1, // OPTIMIZED: Reduced delay for faster LCP
       },
     },
   };
@@ -55,9 +55,11 @@ const Home = ({}) => {
       {/* HERO SECTION */}
       <section className="relative min-h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-          {/* FIX: Explicit style in fallback to prevent Layout Shift (CLS) */}
+          {/* FIX: Precise absolute fallback to eliminate Layout Shift */}
           <Suspense
-            fallback={<div className="bg-black w-full h-full min-h-[100vh]" />}
+            fallback={
+              <div className="absolute inset-0 bg-black min-h-screen w-full" />
+            }
           >
             <HeroCanvas />
           </Suspense>
@@ -76,6 +78,8 @@ const Home = ({}) => {
                   key={index}
                   variants={letterDetails}
                   className="inline-block"
+                  // FIX: Promotes letters to GPU layers to resolve non-composited animation warning
+                  style={{ willChange: "transform, opacity" }}
                 >
                   {char}
                 </motion.span>
@@ -87,6 +91,8 @@ const Home = ({}) => {
                   key={index}
                   variants={letterDetails}
                   className="inline-block"
+                  // FIX: Promotes letters to GPU layers to resolve non-composited animation warning
+                  style={{ willChange: "transform, opacity" }}
                 >
                   {char}
                 </motion.span>
@@ -97,7 +103,7 @@ const Home = ({}) => {
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
             className="flex flex-col items-center gap-4 sm:gap-6"
           >
             <p className="text-white dark:text-white font-bold tracking-widest uppercase opacity-80 text-[10px] sm:text-xs md:text-sm lg:text-base">
@@ -105,15 +111,16 @@ const Home = ({}) => {
             </p>
           </motion.div>
 
+          {/* ACCESSIBILITY FIX: Darker blue background (#0066FF) for 4.5:1 contrast ratio */}
           <motion.button
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
             aria-label="View resume"
             onClick={() => setIsResumeOpen(true)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="mt-6 sm:mt-10 px-5 sm:px-8 py-3 sm:py-4 bg-[#007AFF] text-white font-black font-display rounded-full uppercase tracking-widest text-[9px] sm:text-xs flex items-center gap-2 sm:gap-3 mx-auto shadow-[0_0_20px_rgba(0,122,255,0.3)] hover:shadow-[0_0_40px_rgba(0,122,255,0.6)] transition-all duration-300 ring-1 ring-white/20 hover:ring-white/50"
+            className="mt-6 sm:mt-10 px-5 sm:px-8 py-3 sm:py-4 bg-[#0066FF] text-white font-black font-display rounded-full uppercase tracking-widest text-[9px] sm:text-xs flex items-center gap-2 sm:gap-3 mx-auto shadow-[0_0_20px_rgba(0,102,255,0.3)] hover:shadow-[0_0_40px_rgba(0,102,255,0.6)] transition-all duration-300 ring-1 ring-white/20 hover:ring-white/50"
           >
             <FileText size={16} />
             <span>View Resume</span>
@@ -123,7 +130,7 @@ const Home = ({}) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
+          transition={{ delay: 1.0, duration: 1 }}
           className="absolute bottom-8 sm:bottom-12 left-1/2 flex flex-col items-center gap-4 z-20 pointer-events-none"
           style={{ x: "-50%" }}
         >

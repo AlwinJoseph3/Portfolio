@@ -46,15 +46,17 @@ body {
   border-radius: 4px;
 }
 
+/* FIX: Using transforms instead of width/left for performance */
 .loader-bar::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
-  width: 0%;
+  width: 100%;
   background: #007aff;
-  animation: load 3s ease-in-out infinite;
+  transform: translateX(-100%);
+  animation: load 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
@@ -69,15 +71,12 @@ body {
 
 @keyframes load {
   0% {
-    width: 0%;
-    left: 0;
+    transform: translateX(-100%);
   }
   50% {
-    width: 100%;
-    left: 0;
+    transform: translateX(0);
   }
   100% {
-    width: 0%;
-    left: 100%;
+    transform: translateX(100%);
   }
 }
