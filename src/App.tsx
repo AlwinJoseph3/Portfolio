@@ -18,6 +18,7 @@ const MotoBuddy = lazy(() => import("./pages/projects/MotoBuddy"));
 const SHMS = lazy(() => import("./pages/projects/Shms"));
 const HomeChef = lazy(() => import("./pages/projects/HomeChef"));
 const Elis = lazy(() => import("./pages/projects/Elis"));
+// const [isMounted, setIsMounted] = useState(false);
 
 const AnimatedRoutes = () => {
   const location = useLocation();

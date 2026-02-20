@@ -65,6 +65,7 @@ const Navbar = () => {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
             className="md:hidden w-10 h-10 flex items-center justify-center bg-zinc-900 rounded-full text-white border border-white/10 active:scale-95 transition-all"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}

@@ -33,6 +33,7 @@ const Footer = () => {
           <div className="flex flex-wrap gap-8">
             <a
               href="https://github.com/AlwinJoseph3"
+              aria-label="Visit my GitHub profile"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-bold text-zinc-400 hover:text-[#007AFF] transition-colors uppercase tracking-widest flex items-center gap-2"
@@ -41,6 +42,7 @@ const Footer = () => {
             </a>
             <a
               href="https://linkedin.com/in/alwin-joseph-807420221"
+              aria-label="Visit my LinkedIn profile"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-bold text-zinc-400 hover:text-[#007AFF] transition-colors uppercase tracking-widest flex items-center gap-2"
@@ -50,6 +52,7 @@ const Footer = () => {
 
             <button
               onClick={handleCopyEmail}
+              aria-label="Copy email address to clipboard"
               className="group relative text-sm font-bold text-zinc-400 hover:text-[#007AFF] transition-colors uppercase tracking-widest flex items-center gap-2"
             >
               {copied ? <Check size={16} /> : <Mail size={16} />}
@@ -74,7 +77,7 @@ const Footer = () => {
               className="text-[10px] text-zinc-800 hover:text-zinc-600 transition-colors uppercase tracking-[0.2em] cursor-help"
               title="Just start typing..."
             >
-              Psst... try typing my first name
+              Hey, try typing my first name
             </p>
           </div>
         </div>

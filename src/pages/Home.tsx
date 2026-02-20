@@ -1,3 +1,4 @@
+// src/pages/Home.tsx - Full code with CLS fix
 import { useState, Suspense, lazy } from "react";
 const HeroCanvas = lazy(() => import("../components/HeroCanvas"));
 import { useNavigate } from "react-router-dom";
@@ -25,7 +26,7 @@ const Home = ({}) => {
       opacity: 1,
       transition: {
         staggerChildren: 0.05,
-        delayChildren: 0.2, // Delay after page load
+        delayChildren: 0.2,
       },
     },
   };
@@ -54,7 +55,10 @@ const Home = ({}) => {
       {/* HERO SECTION */}
       <section className="relative min-h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-          <Suspense fallback={<div className="bg-black w-full h-full" />}>
+          {/* FIX: Explicit style in fallback to prevent Layout Shift (CLS) */}
+          <Suspense
+            fallback={<div className="bg-black w-full h-full min-h-[100vh]" />}
+          >
             <HeroCanvas />
           </Suspense>
         </div>
@@ -116,7 +120,6 @@ const Home = ({}) => {
           </motion.button>
         </div>
 
-        {/* MINIMALIST GALAXY SCROLL SUGGESTION */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -125,10 +128,7 @@ const Home = ({}) => {
           style={{ x: "-50%" }}
         >
           <div className="relative flex items-center justify-center">
-            {/* Subtle Orbit */}
             <div className="absolute w-10 h-10 rounded-full border-[0.5px] border-white/5 border-t-white/30 animate-[spin_4s_linear_infinite]" />
-
-            {/* Minimalist Capsule */}
             <div className="w-[18px] h-7 sm:w-5 sm:h-8 border-[0.5px] border-white/20 rounded-full flex justify-center py-1.5 bg-black/20 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
               <motion.div
                 animate={{ y: [0, 12], opacity: [0.8, 0] }}
@@ -148,7 +148,6 @@ const Home = ({}) => {
       <TechStack />
       <AnimatedSeparator />
 
-      {/* PROJECTS */}
       <section
         id="works"
         className="py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto"
@@ -186,9 +185,8 @@ const Home = ({}) => {
                 <div className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative z-10 p-5 sm:p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8 md:gap-12">
-                  {/* Left Side: Number & Info */}
                   <div className="flex items-start gap-6 md:gap-10 max-w-3xl">
-                    <span className="hidden md:block text-5xl font-black font-display text-white/5 font-mono select-none group-hover:text-white/10 transition-colors">
+                    <span className="hidden md:block text-5xl font-black font-display text-white/5 select-none group-hover:text-white/10 transition-colors">
                       {String(index + 1).padStart(2, "0")}
                     </span>
 
@@ -214,7 +212,6 @@ const Home = ({}) => {
                     </div>
                   </div>
 
-                  {/* Right Side: Tech & Action */}
                   <div className="flex flex-row md:flex-col items-center md:items-end justify-between w-full md:w-auto gap-4">
                     <div className="hidden md:flex flex-wrap justify-end gap-2 max-w-[200px]">
                       {project.techStack.map((tech) => (

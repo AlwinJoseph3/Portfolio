@@ -2,13 +2,11 @@ import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, TorusKnot } from "@react-three/drei";
 import * as THREE from "three";
-import { techCategories } from "../data/tech"; // Import your new data
+import { techCategories } from "../data/tech";
 import FadeIn from "./FadeIn";
 
-// --- 3D Element: The "Logic Knot" ---
 const LogicKnot = () => {
   const meshRef = useRef<THREE.Mesh>(null);
-
   useFrame((state) => {
     if (!meshRef.current) return;
     meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.15;
@@ -37,9 +35,9 @@ const TechStack = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
         <div className="space-y-12 md:space-y-16 order-2 lg:order-1">
           <FadeIn direction="right">
-            <h3 className="text-4xl md:text-5xl font-black font-display text-white uppercase tracking-tighter mb-8 md:mb-10 text-center lg:text-left">
+            <h2 className="text-4xl md:text-5xl font-black font-display text-white uppercase tracking-tighter mb-8 md:mb-10 text-center lg:text-left">
               Tech Stack
-            </h3>
+            </h2>
           </FadeIn>
 
           <div className="space-y-10 md:space-y-12">
@@ -54,22 +52,29 @@ const TechStack = () => {
                     {category.label}
                   </span>
 
-                  <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-4 md:gap-x-8">
+                  <div className="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-4 md:gap-x-10">
                     {category.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="flex items-center gap-3 group/item cursor-default relative"
+                        className="flex items-center gap-4 group/item cursor-default relative"
                       >
                         <img
                           src={skill.icon}
                           alt={skill.name}
-                          className="w-5 h-5 md:w-6 md:h-6"
+                          title={skill.name}
+                          /* Increased dimensions for better visibility */
+                          width="32"
+                          height="32"
+                          loading="lazy"
+                          /* Removed grayscale and added a subtle scale effect on hover */
+                          className="w-8 h-8 md:w-9 md:h-9 object-contain transition-transform duration-300 group-hover/item:scale-110"
                         />
 
                         <span className="text-xl md:text-2xl font-bold font-display text-white uppercase group-hover/item:text-[#007AFF] transition-colors duration-300">
                           {skill.name}
                         </span>
-                        <span className="absolute -bottom-1 left-9 w-0 h-0.5 bg-[#007AFF] group-hover/item:w-[calc(100%-2.25rem)] transition-all duration-300" />
+                        {/* Adjusted underline to match larger icon spacing */}
+                        <span className="absolute -bottom-1 left-12 w-0 h-0.5 bg-[#007AFF] group-hover/item:w-[calc(100%-3rem)] transition-all duration-300" />
                       </div>
                     ))}
                   </div>
