@@ -4,19 +4,20 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import ProjectDetail from "./pages/ProjectDetail";
-import NotFound from "./pages/NotFound";
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 import Starfield from "./components/StarBackground";
 import CursorTrail from "./components/CursorTrail";
 import SignalGlitch from "./components/SignalGlitch";
 import { AnimatePresence } from "framer-motion";
 
-import MotoBuddy from "./pages/projects/MotoBuddy";
-import SHMS from "./pages/projects/Shms";
-import HomeChef from "./pages/projects/HomeChef";
-import Elis from "./pages/projects/Elis";
+const MotoBuddy = lazy(() => import("./pages/projects/MotoBuddy"));
+const SHMS = lazy(() => import("./pages/projects/Shms"));
+const HomeChef = lazy(() => import("./pages/projects/HomeChef"));
+const Elis = lazy(() => import("./pages/projects/Elis"));
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -55,7 +56,9 @@ const App = () => {
 
       <div className="relative z-10">
         <Navbar />
-        <AnimatedRoutes />
+        <Suspense fallback={<div className="h-[100vh] w-[100vw] bg-black" />}>
+          <AnimatedRoutes />
+        </Suspense>
       </div>
     </Router>
   );

@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta name="theme-color" content="#000000" />
@@ -14,115 +22,23 @@
     />
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://your-netlify-url.netlify.app/" />
+    <meta property="og:url" content="https://alwinjoseph.netlify.app/" />
     <meta property="og:title" content="Portfolio | Alwin Joseph" />
-    <meta
-      property="og:description"
-      content="Explore my latest projects and creative experiments."
-    />
+    <meta property="og:description" content="Go ahead. Take a look." />
     <meta
       property="og:image"
-      content="https://alwinjoseph.netlify.app/omlete.png"
+      content="https://alwinjoseph.netlify.app/logo.png"
     />
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="Portfolio | Alwin Joseph" />
-    <meta
-      property="twitter:description"
-      content="Explore my latest projects and creative experiments."
-    />
+    <meta property="twitter:description" content="Go ahead. Take a look." />
     <meta
       property="twitter:image"
-      content="https://alwinjoseph.netlify.app/omlete.png"
+      content="https://alwinjoseph.netlify.app/logo.png"
     />
 
-    <style>
-      html,
-      body {
-        background-color: #000000;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        font-family: monospace;
-      }
-
-      #root {
-        height: 100%;
-        width: 100%;
-      }
-
-      .initial-loader {
-        height: 100vh;
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: #000000;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9999;
-      }
-
-      /* 3. The "Breathing" Text Animation */
-      .loader-text {
-        color: #ffffff;
-        font-size: 14px;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        animation: pulse 2s infinite ease-in-out;
-        opacity: 0.5;
-      }
-
-      /* 4. A subtle blue progress bar */
-      .loader-bar {
-        width: 100px;
-        height: 2px;
-        background: #111;
-        margin-top: 20px;
-        position: relative;
-        overflow: hidden;
-        border-radius: 4px;
-      }
-
-      .loader-bar::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 0%;
-        background: #007aff; /* Your brand blue */
-        animation: load 3s ease-in-out infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 0.5;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-
-      @keyframes load {
-        0% {
-          width: 0%;
-          left: 0;
-        }
-        50% {
-          width: 100%;
-          left: 0;
-        }
-        100% {
-          width: 0%;
-          left: 100%;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="/loader.css" />
   </head>
   <body>
     <div id="root">

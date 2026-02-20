@@ -1,20 +1,21 @@
 {
-  "short_name": "Alwin Portfolio",
-  "name": "Alwin Joseph | Frontend Developer",
+  "short_name": "Alwin",
+  "name": "Alwin Joseph Portfolio",
   "icons": [
     {
-      "src": "/omlete.png",
+      "src": "logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/omlete.png",
+      "src": "logo.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#000000"
