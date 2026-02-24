@@ -17,9 +17,7 @@ const Elis = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Directly grab ELIS data (ID: 4)
   const project = projectData["4"];
-  // For navigation to next project (Loop back to MotoBuddy -> ID: 1)
   const nextProject = projectData["1"];
 
   // Scroll Progress Logic
@@ -379,7 +377,7 @@ const Elis = () => {
               <span className="text-zinc-500 uppercase tracking-widest text-xs font-bold">
                 Up Next
               </span>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-white uppercase tracking-tighter group-hover:scale-105 transition-transform duration-500">
+              <h2 className="text-4xl sm:text-6xl md:text-8xl text-white uppercase tracking-tighter group-hover:scale-105 transition-transform duration-500">
                 {nextProject.name}
               </h2>
               <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center bg-black group-hover:bg-[#F15A24] group-hover:border-[#F15A24] transition-all">

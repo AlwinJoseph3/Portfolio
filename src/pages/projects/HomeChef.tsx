@@ -13,7 +13,7 @@ const HomeChef = () => {
   // Directly grab HomeChef data (ID: 3)
   const project = projectData["3"];
   // For navigation to next project (Loop back to MotoBuddy -> ID: 1)
-  const nextProject = projectData["1"];
+  const nextProject = projectData["4"];
 
   // Scroll Progress Logic
   const { scrollYProgress } = useScroll();
@@ -286,9 +286,7 @@ const HomeChef = () => {
                   </div>
 
                   <div>
-                    <p className="text-lg text-white mb-2">
-                      Character
-                    </p>
+                    <p className="text-lg text-white mb-2">Character</p>
                     <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
                       {project.fonttheme}
                     </p>

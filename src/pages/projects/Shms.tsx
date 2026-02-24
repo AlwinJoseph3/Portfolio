@@ -90,7 +90,7 @@ const SHMS = () => {
             style={{ y: y1, opacity: opacityHero }}
             className="max-w-5xl mx-auto z-20 flex flex-col items-center"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[8rem] xl:text-[9rem] font-black tracking-tighter text-white uppercase leading-[0.85] mb-8 sm:mb-12">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[8rem] xl:text-[6.5rem] font-black tracking-tighter text-white uppercase leading-[0.85] mb-8 sm:mb-12">
               {project.name}
             </h1>
 
@@ -344,7 +344,7 @@ const SHMS = () => {
               <span className="text-zinc-500 uppercase tracking-widest text-xs font-bold">
                 Up Next
               </span>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-white uppercase tracking-tighter group-hover:scale-105 transition-transform duration-500">
+              <h2 className="text-4xl sm:text-6xl md:text-8xl  text-white uppercase tracking-tighter group-hover:scale-105 transition-transform duration-500">
                 {nextProject.name}
               </h2>
               <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center bg-black group-hover:bg-[#2196f3] group-hover:border-[#2196f3] transition-all">
