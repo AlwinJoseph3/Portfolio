@@ -1,8 +1,6 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/AlwinJoseph3/Portfolio/main/public/logo.webp" alt="Alwin Joseph Logo" width="120" height="auto" />
-  <h1>Alwin Joseph | Creative Developer</h1>
-  <p>Frontend Developer • UI/UX Enthusiast • 3D Web Experiences</p>
-
+  <h1>Alwin Joseph | Portfolio</h1>
+<br>
   <p>
     <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
     <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
@@ -50,10 +48,11 @@ This portfolio has been rigorously audited and optimized to achieve maximum **Li
 ### Lighthouse Reports 🚦
 
 > **[ BEFORE OPTIMIZATION ]**  
-> `![Lighthouse Before](path/to/before_image.png)`
+> <img src='./public/before.png'>
 
 > **[ AFTER OPTIMIZATION ]**  
-> `![Lighthouse After](path/to/after_image.png)`
+> <img src='./public/after.png'>
+`
 
 ## 📂 Project Structure
 
@@ -67,5 +66,5 @@ This portfolio has been rigorously audited and optimized to achieve maximum **Li
 
 <div align="center">
   <p>Built with ❤️ by <b>Alwin Joseph</b></p>
-  <a href="https://alwinjoseph.netlify.app/"><b>Visit Live Site</b></a>
+  <a href="https://alwinjoseph.netlify.app/"><b>Visit</b></a>
 </div>
