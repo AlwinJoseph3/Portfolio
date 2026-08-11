@@ -56,7 +56,7 @@ export const projectData: Record<string, Project> = {
     font: "'JetBrains Mono', monospace",
     fonttheme:
       "Monospace typography for a raw, technical developer experience.",
-    screenshots: ["/assets/ELIS/ss1.png", "/assets/ELIS/ss2.png"],
+    screenshots: ["/assets/ELIS/1.png", "/assets/ELIS/2.png"],
   },
   "2": {
     id: "motobuddy",

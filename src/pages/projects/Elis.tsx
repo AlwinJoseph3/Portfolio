@@ -344,21 +344,21 @@ const Elis = () => {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="flex flex-col gap-12 sm:gap-16 max-w-6xl mx-auto">
               {project.screenshots.map((ss, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="relative group rounded-2xl overflow-hidden border border-white/5 bg-zinc-900/50"
+                  transition={{ delay: idx * 0.2 }}
+                  className="relative group rounded-3xl overflow-hidden border border-white/5 bg-zinc-900/30 p-2 sm:p-4 hover:border-[#06b6d4]/30 transition-colors"
                 >
-                  <div className="p-4">
+                  <div className="rounded-2xl overflow-hidden shadow-2xl">
                     <ImageWithLoader
                       src={ss}
                       alt={`Screen ${idx}`}
-                      className="w-full h-auto object-contain rounded-lg shadow-2xl"
+                      className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700"
                     />
                   </div>
                 </motion.div>
