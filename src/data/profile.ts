@@ -26,7 +26,7 @@ export interface Profile {
 export const profileData: Profile = {
   firstName: "Alwin",
   lastName: "Joseph",
-  titles: ["Frontend Dev", "UI/UX", "Graphics"],
+  titles: ["Software Dev", "UI/UX", "Graphics"],
   location: "Kochi, Kerala.",
   education: {
     degree: "B.Tech • Computer Science & Business Systems", // Using string with bullet for simplicity in display

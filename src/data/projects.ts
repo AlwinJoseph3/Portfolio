@@ -20,6 +20,45 @@ export interface Project {
 
 export const projectData: Record<string, Project> = {
   "1": {
+    id: "elis",
+    category: "AI Developer Tool",
+    name: "ELIS",
+    description:
+      "A Socratic AI Tutor that helps developers find logic gaps, not just code. It uses a diagnostic approach to guide you through 'stuck points'.",
+    link: "https://github.com/AlwinJoseph3/ELIS",
+    story:
+      "ELIS (Explain Like I'm Stuck) was born from the frustration that standard AI coding assistants often spoon-feed answers, hindering true learning. I wanted to create a tool that acts as a senior mentor, using the Socratic method to force developers to articulate their problems and find their own solutions. Built with a 'Cyber-Minimalist' aesthetic, it provides a distraction-free environment for deep debugging.",
+    techStack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "Gemini API",
+      "Vite",
+    ],
+    features: [
+      "Socratic Diagnostic Engine",
+      "Stuck Point Analysis",
+      "Metaphor Mode (Explain via analogies)",
+      "Secure API Proxy",
+    ],
+    architecture:
+      "React frontend paired with a Node.js/Express backend that proxies all Gemini API requests, keeping the API key server-side and enabling request rate-limiting. No database; chat history is persisted locally via browser storage.",
+    stats: {
+      Security: "Key Protected",
+      Latency: "Real-time",
+    },
+    mockupimage: "/assets/ELIS/elis-mockup.png",
+    colortheme: "Deep Space Zinc & Cyan for focus.",
+    colors: ["#06b6d4", "#18181b", "#000000"],
+    fontname: "JetBrains Mono",
+    font: "'JetBrains Mono', monospace",
+    fonttheme:
+      "Monospace typography for a raw, technical developer experience.",
+    screenshots: ["/assets/ELIS/ss1.png", "/assets/ELIS/ss2.png"],
+  },
+  "2": {
     id: "motobuddy",
     category: "Mobile App",
     name: "MotoBuddy",
@@ -47,7 +86,7 @@ export const projectData: Record<string, Project> = {
       "/assets/Motobuddy/profile.png",
     ],
   },
-  "2": {
+  "3": {
     id: "smart health management system",
     category: "Mobile App",
     name: "Smart Health Management System",
@@ -71,7 +110,7 @@ export const projectData: Record<string, Project> = {
       "/assets/SHMS/type.png",
     ],
   },
-  "3": {
+  "4": {
     id: "homechef",
     category: "Mobile App",
     name: "HomeChef",
@@ -95,36 +134,5 @@ export const projectData: Record<string, Project> = {
       "/assets/HomeChef/foods.png",
       "/assets/HomeChef/plate.png",
     ],
-  },
-  "4": {
-    id: "elis",
-    category: "AI Developer Tool",
-    name: "ELIS",
-    description:
-      "A Socratic AI Tutor that helps developers find logic gaps, not just code. It uses a diagnostic approach to guide you through 'stuck points'.",
-    link: "https://github.com/AlwinJoseph3/ELIS",
-    story:
-      "ELIS (Explain Like I'm Stuck) was born from the frustration that standard AI coding assistants often spoon-feed answers, hindering true learning. I wanted to create a tool that acts as a senior mentor, using the Socratic method to force developers to articulate their problems and find their own solutions. Built with a 'Cyber-Minimalist' aesthetic, it provides a distraction-free environment for deep debugging.",
-    techStack: ["React", "TypeScript", "Tailwind CSS", "Gemini API", "Vite"],
-    features: [
-      "Socratic Diagnostic Engine",
-      "Stuck Point Analysis",
-      "Metaphor Mode (Explain via analogies)",
-      "Local-First Privacy ",
-    ],
-    architecture:
-      "Client-side React application integrating directly with Google Gemini API. Zero backend database; all state is persisted locally via browser storage.",
-    stats: {
-      Privacy: "100% Local",
-      Latency: "Real-time",
-    },
-    mockupimage: "/assets/ELIS/elis-mockup.png",
-    colortheme: "Deep Space Zinc & Cyan for focus.",
-    colors: ["#06b6d4", "#18181b", "#000000"],
-    fontname: "JetBrains Mono",
-    font: "'JetBrains Mono', monospace",
-    fonttheme:
-      "Monospace typography for a raw, technical developer experience.",
-    screenshots: ["/assets/ELIS/ss1.png", "/assets/ELIS/ss2.png"],
   },
 };

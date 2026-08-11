@@ -17,8 +17,8 @@ const Elis = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const project = projectData["4"];
-  const nextProject = projectData["1"];
+  const project = projectData["1"];
+  const nextProject = projectData["2"];
 
   // Scroll Progress Logic
   const { scrollYProgress } = useScroll();
@@ -97,7 +97,7 @@ const Elis = () => {
             className="max-w-5xl mx-auto z-20 flex flex-col items-center"
           >
             <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[8rem] xl:text-[9rem] font-black tracking-tighter text-white uppercase leading-[0.85] mb-8 sm:mb-12">
-              ELIS
+              {project.name}
             </h1>
 
             <div className="max-w-2xl mx-auto">

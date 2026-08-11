@@ -10,10 +10,10 @@ const HomeChef = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Directly grab HomeChef data (ID: 3)
-  const project = projectData["3"];
-  // For navigation to next project (Loop back to MotoBuddy -> ID: 1)
-  const nextProject = projectData["4"];
+  // Directly grab HomeChef data (ID: 4)
+  const project = projectData["4"];
+  // For navigation to next project (Loop back to ELIS -> ID: 1)
+  const nextProject = projectData["1"];
 
   // Scroll Progress Logic
   const { scrollYProgress } = useScroll();

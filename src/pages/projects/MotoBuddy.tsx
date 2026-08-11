@@ -10,10 +10,10 @@ const MotoBuddy = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Directly grab MotoBuddy data (ID: 1)
-  const project = projectData["1"];
-  // For navigation to next project (SHMS -> ID: 2)
-  const nextProject = projectData["2"];
+  // Directly grab MotoBuddy data (ID: 2)
+  const project = projectData["2"];
+  // For navigation to next project (SHMS -> ID: 3)
+  const nextProject = projectData["3"];
 
   // Scroll Progress Logic
   const { scrollYProgress } = useScroll();

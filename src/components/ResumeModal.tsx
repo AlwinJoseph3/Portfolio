@@ -1,4 +1,5 @@
 import { X, Download } from "lucide-react";
+import resumePdf from "../assets/resume.pdf";
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -21,8 +22,8 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
           </h2>
           <div className="flex items-center gap-4">
             <a
-              href="/Resume.pdf"
-              download="Resume.pdf"
+              href={resumePdf}
+              download="resume.pdf"
               className="p-2 sm:p-3 bg-zinc-900 rounded-full text-white hover:scale-110 transition-transform hover:bg-[#007AFF]"
               title="Download PDF"
             >
@@ -38,11 +39,19 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
         </div>
 
         <div className="flex-1 w-full h-full bg-zinc-900/50 relative overflow-hidden">
-          <iframe
-            src="/Resume.pdf"
+          <object
+            data={resumePdf}
+            type="application/pdf"
             className="w-full h-full border-0"
             title="Resume PDF"
-          />
+          >
+            <div className="flex flex-col items-center justify-center h-full p-4 text-center">
+              <p className="text-zinc-400 mb-4">It appears your browser doesn't support embedded PDFs.</p>
+              <a href={resumePdf} download="resume.pdf" className="px-6 py-3 bg-[#007AFF] text-white rounded-full font-medium hover:bg-blue-600 transition-colors">
+                Download Resume
+              </a>
+            </div>
+          </object>
         </div>
       </div>
     </div>

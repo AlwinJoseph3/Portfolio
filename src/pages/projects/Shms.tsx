@@ -10,10 +10,10 @@ const SHMS = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Directly grab SHMS data (ID: 2)
-  const project = projectData["2"];
-  // For navigation to next project (HomeChef -> ID: 3)
-  const nextProject = projectData["3"];
+  // Directly grab SHMS data (ID: 3)
+  const project = projectData["3"];
+  // For navigation to next project (HomeChef -> ID: 4)
+  const nextProject = projectData["4"];
 
   // Scroll Progress Logic
   const { scrollYProgress } = useScroll();

@@ -12,7 +12,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["logo.png", "Resume.pdf", "icons/*.svg"],
+      includeAssets: ["logo.png", "icons/*.svg"],
       devOptions: {
         enabled: true, // Allows testing PWA on localhost
       },
