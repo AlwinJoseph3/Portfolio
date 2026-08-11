@@ -1,5 +1,5 @@
 import { X, Download } from "lucide-react";
-import resumePdf from "../assets/resume.pdf";
+const resumePdf = "/assets/resume.pdf";
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -46,8 +46,14 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
             title="Resume PDF"
           >
             <div className="flex flex-col items-center justify-center h-full p-4 text-center">
-              <p className="text-zinc-400 mb-4">It appears your browser doesn't support embedded PDFs.</p>
-              <a href={resumePdf} download="resume.pdf" className="px-6 py-3 bg-[#007AFF] text-white rounded-full font-medium hover:bg-blue-600 transition-colors">
+              <p className="text-zinc-400 mb-4">
+                It appears your browser doesn't support embedded PDFs.
+              </p>
+              <a
+                href={resumePdf}
+                download="resume.pdf"
+                className="px-6 py-3 bg-[#007AFF] text-white rounded-full font-medium hover:bg-blue-600 transition-colors"
+              >
                 Download Resume
               </a>
             </div>
